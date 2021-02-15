@@ -1,4 +1,4 @@
-from Field import UInt8Field, Int32Field, FloatField, DoubleField, ReaderField, ArrayField
+from Field import Int32Field, FloatField, DoubleField, BoolField, ReaderField, ArrayField
 from Reader import Reader
 from Readers import Int32KVP
 
@@ -41,9 +41,9 @@ class GamePrefsData(Reader):
     cameraURot_w = FloatField()
     reformCursorSize = Int32Field()
     replicatorMultipliers = ArrayField(lambda: ReaderField(Int32KVP))
-    detailPower = UInt8Field()
-    detailVein = UInt8Field()
-    detailSpaceGuide = UInt8Field()
-    detailSign = UInt8Field()
-    detailIcon = UInt8Field()
+    detailPower = BoolField()
+    detailVein = BoolField()
+    detailSpaceGuide = BoolField()
+    detailSign = BoolField()
+    detailIcon = BoolField()
     tutorialShowing = ArrayField(Int32Field)

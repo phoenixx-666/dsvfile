@@ -1,4 +1,4 @@
-from Field import UInt8Field, Int32Field, Int64Field, ReaderField, StringField, ArrayField
+from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField, ArrayField
 from Reader import Reader
 from Readers.GameDesc import GameDesc
 from Readers.GamePrefsData import GamePrefsData
@@ -42,8 +42,8 @@ class GameData(Reader):
     gameTick = Int64Field()
     gamePrefsData = ReaderField(GamePrefsData)
     gameHistoryData = ReaderField(GameHistoryData)
-    hidePlayerModel = UInt8Field()
-    disableController = UInt8Field()
+    hidePlayerModel = BoolField()
+    disableController = BoolField()
     gameStatData = ReaderField(GameStatData)
     planetId = Int32Field()
     mainPlayer = ReaderField(Player)

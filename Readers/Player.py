@@ -1,4 +1,4 @@
-from Field import UInt8Field, Int32Field, EnumField, FloatField, DoubleField, ReaderField
+from Field import Int32Field, FloatField, DoubleField, EnumField, BoolField, ReaderField
 from Reader import Reader
 from Readers.Mecha import Mecha
 from Readers.StorageComponent import StorageComponent
@@ -55,7 +55,7 @@ class Player(Reader):
     uRotation_w = FloatField()
     movementState = EMovementState()
     warpState = FloatField()
-    warpCommand = UInt8Field()
+    warpCommand = BoolField()
     uVelocity_x = DoubleField()
     uVelocity_y = DoubleField()
     uVelocity_z = DoubleField()

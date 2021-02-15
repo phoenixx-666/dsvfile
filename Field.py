@@ -106,6 +106,11 @@ class EnumField(Field):
         return elem
 
 
+class BoolField(EnumField):
+    enum_values = ('False', 'True')
+    base_type = UInt8Field
+
+
 class StringField(Field):
     type_name = 'string'
 

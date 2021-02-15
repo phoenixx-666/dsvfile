@@ -1,4 +1,4 @@
-from Field import UInt8Field, Int32Field, DoubleField, EnumField
+from Field import Int32Field, DoubleField, EnumField, BoolField
 from Reader import Reader
 
 """
@@ -28,14 +28,14 @@ class ENaviStage(EnumField):
 
 class PlayerNavigation(Reader):
     version = Int32Field()
-    navigating = UInt8Field()
+    navigating = BoolField()
     naviAstroId = Int32Field()
     naviTarget_x = DoubleField()
     naviTarget_y = DoubleField()
     naviTarget_z = DoubleField()
-    useFly = UInt8Field()
-    useSail = UInt8Field()
-    useWarp = UInt8Field()
+    useFly = BoolField()
+    useSail = BoolField()
+    useWarp = BoolField()
     stage = ENaviStage()
     flyThreshold = DoubleField()
     sailThreshold = DoubleField()

@@ -1,4 +1,4 @@
-from Field import UInt8Field, Int32Field, Int64Field, FloatField, ReaderField, ArrayField
+from Field import Int32Field, Int64Field, FloatField, BoolField, ReaderField, ArrayField
 from Reader import Reader
 
 """
@@ -51,7 +51,7 @@ GameHistoryData
 
 class TechState(Reader):
     techProtoIndex = Int32Field()
-    techState_unlocked = UInt8Field()
+    techState_unlocked = BoolField()
     techState_curLevel = Int32Field()
     techState_maxLevel = Int32Field()
     techState_hashUploaded = Int64Field()
@@ -64,13 +64,13 @@ class GameHistoryData(Reader):
     tutorialUnlocked = ArrayField(Int32Field)
     featureKeys = ArrayField(Int32Field)
     techStates = ArrayField(lambda: ReaderField(TechState))
-    autoManageLabItems = UInt8Field()
+    autoManageLabItems = BoolField()
     currentTech = Int32Field()
     techQueue = ArrayField(Int32Field)
     universeObserveLevel = Int32Field()
     solarSailLife = FloatField()
     solarEnergyLossRate = FloatField()
-    useIonLayer = UInt8Field()
+    useIonLayer = BoolField()
     inserterStackCount = Int32Field()
     logisticDroneSpeed = FloatField()
     logisticDroneSpeedScale = FloatField()
@@ -78,7 +78,7 @@ class GameHistoryData(Reader):
     logisticShipSailSpeed = FloatField()
     logisticShipWarpSpeed = FloatField()
     logisticShipSpeedScale = FloatField()
-    logisticShipWarpDrive = UInt8Field()
+    logisticShipWarpDrive = BoolField()
     logisticShipCarries = Int32Field()
     miningCostRate = FloatField()
     miningSpeedScale = FloatField()
@@ -87,4 +87,4 @@ class GameHistoryData(Reader):
     techSpeed = Int32Field()
     dysonNodeLatitude = FloatField()
     universeMatrixPointUploaded = Int64Field()
-    missionAccomplished = UInt8Field()
+    missionAccomplished = BoolField()
