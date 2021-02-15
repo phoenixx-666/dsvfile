@@ -1,8 +1,9 @@
-from Field import Int32Field, FloatField, DoubleField, EnumField, BoolField, ReaderField
+from Field import Int32Field, FloatField, DoubleField, BoolField, ReaderField
+from Field.Enums import EMovementState
 from Reader import Reader
-from Readers.Mecha import Mecha
-from Readers.StorageComponent import StorageComponent
-from Readers.PlayerNavigation import PlayerNavigation
+from Readers.Player.Mecha import Mecha
+from Readers.StorageSystem.StorageComponent import StorageComponent
+from Readers.Player.PlayerNavigation import PlayerNavigation
 
 
 """
@@ -36,10 +37,6 @@ Player
 """
 
 
-class EMovementState(EnumField):
-    enum_values = ('Walk', 'Drift', 'Fly', 'Sail')
-
-
 class Player(Reader):
     version = Int32Field()
     planetId = Int32Field()
@@ -63,5 +60,5 @@ class Player(Reader):
     inhandItemCount = Int32Field()
     mecha = ReaderField(Mecha)
     package = ReaderField(StorageComponent)
-    playerNavigationd = ReaderField(PlayerNavigation)
+    playerNavigation = ReaderField(PlayerNavigation)
     sandCount = Int32Field()

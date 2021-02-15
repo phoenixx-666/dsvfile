@@ -1,5 +1,7 @@
-from Field import Int32Field, EnumField, ReaderField, ArrayField
+from Field import Int32Field, ReaderField, ArrayField
+from Field.Enums import EStorageType
 from Reader import Reader
+
 
 """
 StorageComponent
@@ -24,14 +26,6 @@ StorageComponent
 """
 
 
-class EStorageType(EnumField):
-    enum_values = {
-        0: 'Default',
-        1: 'Fuel',
-        9: 'Filtered'
-    }
-
-
 class Grid(Reader):
     itemId = Int32Field()
     filter = Int32Field()
@@ -41,7 +35,7 @@ class Grid(Reader):
 
 class StorageComponent(Reader):
     version = Int32Field()
-    scId = Int32Field()
+    id = Int32Field()
     entityId = Int32Field()
     previous = Int32Field()
     next = Int32Field()

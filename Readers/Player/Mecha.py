@@ -1,9 +1,9 @@
 from Field import Int32Field, FloatField, DoubleField, ReaderField, ArrayField
 from Reader import Reader
-from Readers.StorageComponent import StorageComponent
-from Readers.MechaForge import MechaForge
-from Readers.MechaLab import MechaLab
-from Readers.MechaDrone import MechaDrone
+from Readers.StorageSystem.StorageComponent import StorageComponent
+from Readers.Player.MechaForge import MechaForge
+from Readers.Player.MechaLab import MechaLab
+from Readers.Player.MechaDrone import MechaDrone
 
 
 """

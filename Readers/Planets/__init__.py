@@ -1,10 +1,10 @@
 from Field import Int32Field, UInt32Field, FloatField, ArrayField, ReaderField
 from Reader import Reader
-from Readers.PlanetData import PlanetData
-from Readers.EntityData import EntityData
-from Readers.PrebuildData import PrebuildData
-from Readers.VegeData import VegeData
-from Readers.VeinData import VeinData
+from Readers.Planets.PlanetData import PlanetData
+from Readers.Planets.EntityData import EntityData
+from Readers.Planets.PrebuildData import PrebuildData
+from Readers.Planets.VegeData import VegeData
+from Readers.Planets.VeinData import VeinData
 
 """
 PlanetFactory

@@ -1,5 +1,7 @@
-from Field import Int32Field, DoubleField, EnumField, BoolField
+from Field import Int32Field, DoubleField, BoolField
+from Field.Enums import ENaviStage
 from Reader import Reader
+
 
 """
 PlayerNavigation
@@ -20,10 +22,6 @@ PlayerNavigation
     double maxSailSpeed
 }
 """
-
-
-class ENaviStage(EnumField):
-    enum_values = ('None', 'Departure', 'OriginOrbit', 'AccOrbit', 'Space', 'DestOrbit', 'Approaching')
 
 
 class PlayerNavigation(Reader):

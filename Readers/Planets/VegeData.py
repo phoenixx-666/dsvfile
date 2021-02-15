@@ -26,7 +26,7 @@ VegeData
 
 class VegeData(Reader):
     version = UInt8Field()
-    vdId = Int32Field()
+    id = Int32Field()
     protoId = Int16Field()
     modelIndex = Int16Field()
     hp = Int16Field()

@@ -1,6 +1,6 @@
-from Field import UInt8Field, Int16Field, Int32Field, FloatField, EnumField
+from Field import UInt8Field, Int16Field, Int32Field, FloatField
+from Field.Enums import EVeinType16
 from Reader import Reader
-from Readers.PlanetData import EVeinType
 
 
 """
@@ -25,13 +25,9 @@ VeinData
 """
 
 
-class EVeinType16(EVeinType):
-    base_type = Int16Field
-
-
 class VeinData(Reader):
     version = UInt8Field()
-    veinDataId = Int32Field()
+    id = Int32Field()
     veinType = EVeinType16()
     modelIndex = Int16Field()
     groupIndex = Int16Field()

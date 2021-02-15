@@ -1,10 +1,10 @@
-from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField, ArrayField
+from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField
 from Reader import Reader
 from Readers.GameDesc import GameDesc
 from Readers.GamePrefsData import GamePrefsData
 from Readers.GameHistoryData import GameHistoryData
 from Readers.GameStatData import GameStatData
-from Readers.Player import Player
+from Readers.Player.__init__ import Player
 from Readers.GalacticTransport import GalacticTransport
 
 

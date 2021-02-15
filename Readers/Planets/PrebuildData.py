@@ -36,7 +36,7 @@ PrebuildData
 
 class PrebuildData(Reader):
     version = UInt8Field()
-    pdId = Int32Field()
+    id = Int32Field()
     protoId = Int16Field()
     modelIndex = Int16Field()
     pos_x = FloatField()

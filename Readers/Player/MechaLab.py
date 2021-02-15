@@ -1,6 +1,6 @@
 from Field import Int32Field, ReaderField, ArrayField
 from Reader import Reader
-from Readers.Int32KVP import Int32KVP
+from Readers import Int32KVP
 
 
 class MechaLab(Reader):

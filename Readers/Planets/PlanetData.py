@@ -1,5 +1,5 @@
-from Field import Int32Field,  Int64Field, FloatField,\
-    EnumField, ByteStringField, ReaderField, ArrayField
+from Field import Int32Field,  Int64Field, FloatField, ByteStringField, ReaderField, ArrayField
+from Field.Enums import EVeinType
 from Reader import Reader
 
 
@@ -21,13 +21,6 @@ PlanetData
     }
 }
 """
-
-
-class EVeinType(EnumField):
-    enum_values = ('None', 'Iron', 'Copper', 'Silicium',
-                   'Titanium', 'Stone', 'Coal', 'Oil',
-                   'Fireice', 'Diamond', 'Fractal', 'Crysrub',
-                   'Grat', 'Bamboo', 'Mag')
 
 
 class VeinGroup(Reader):

@@ -32,7 +32,7 @@ class FixedHeaderField(Field):
     def __init__(self, header):
         self.header = header
         super().__init__()
-    
+
     def read(self, input_stream, reader):
         if input_stream.read(len(self.header)).decode('ISO 8859-1') != self.header:
             raise IncorrectHeaderException
@@ -145,7 +145,7 @@ class ByteStringField(Field):
     def __init__(self, length_field=Int32Field):
         self.length_field = length_field()
         super().__init__()
-    
+
     def read(self, input_stream, reader):
         length = self.length_field.read(input_stream, reader)
         return input_stream.read(length)
@@ -202,7 +202,7 @@ class ReaderField(Field):
     def __init__(self, reader_class):
         self.reader_class = reader_class
         super().__init__()
-    
+
     def read(self, input_stream, reader):
         local_reader = self.reader_class()
         local_reader.read(input_stream)
