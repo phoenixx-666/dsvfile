@@ -11,7 +11,6 @@ class Field(object):
     type_name = None
 
     def __init__(self):
-        cls = self.__class__
         self.order = Field.field_counter
         Field.field_counter += 1
 
@@ -55,6 +54,12 @@ class UInt8Field(FixedSizeNumberField):
     dtype = np.uint8
 
 
+class Int16Field(FixedSizeNumberField):
+    type_name = 'int16'
+    size = 2
+    dtype = np.int16
+
+
 class Int32Field(FixedSizeNumberField):
     type_name = 'int32'
     size = 4
@@ -65,6 +70,12 @@ class Int64Field(FixedSizeNumberField):
     type_name = 'int64'
     size = 8
     dtype = np.int64
+
+
+class UInt32Field(FixedSizeNumberField):
+    type_name = 'uint32'
+    size = 4
+    dtype = np.uint32
 
 
 class FloatField(FixedSizeNumberField):
