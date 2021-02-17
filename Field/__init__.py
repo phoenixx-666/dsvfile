@@ -149,12 +149,21 @@ class StringField(Field):
 class ByteStringField(Field):
     type_name = 'bytestring'
 
-    def __init__(self, length_field=Int32Field):
-        self.length_field = length_field()
+    def __init__(self, length_field=Int32Field, length_function=None):
+        if isinstance(length_field, str):
+            self.length_field = length_field
+        else:
+            self.length_field = length_field()
+        self.length_function = length_function
         super().__init__()
 
     def read(self, input_stream, reader):
-        length = self.length_field.read(input_stream, reader)
+        if isinstance(self.length_field, str):
+            length = reader.__getattribute__(self.length_field)
+        else:
+            length = self.length_field.read(input_stream, reader)
+        if self.length_function is not None:
+            length = self.length_function(length)
         return input_stream.read(length)
 
     def visualize(self, value):

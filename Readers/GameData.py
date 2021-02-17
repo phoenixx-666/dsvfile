@@ -1,4 +1,4 @@
-from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField, ConditionalField
+from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField, ArrayField, ConditionalField
 from Func import ge
 from Reader import Reader
 from Readers.GameDesc import GameDesc
@@ -7,6 +7,7 @@ from Readers.GameHistoryData import GameHistoryData
 from Readers.GameStatData import GameStatData
 from Readers.Player import Player
 from Readers.GalacticTransport import GalacticTransport
+from Readers.Planets import PlanetFactory
 
 
 """
@@ -50,4 +51,5 @@ class GameData(Reader):
     mainPlayer = ReaderField(Player)
     factoryCount = Int32Field()
     galacticTransport = ReaderField(GalacticTransport)
-    # planetFactory = ArrayField(lambda: ReaderField(PlanetFactory), length_field='factoryCount')
+    planetFactory = ArrayField(lambda: ReaderField(PlanetFactory), length_field='factoryCount')
+    galaxyStarCount = Int32Field()

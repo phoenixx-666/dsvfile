@@ -49,7 +49,7 @@ class CargoTraffic(Reader):
     pathCapacity = Int32Field()
     pathRecycleCursor = Int32Field()
     beltPool = ArrayField(lambda: ReaderField(BeltComponent), length_field='beltCursor', length_function=decr())
-    beltRecycle = ArrayField(length_field='beltRecycleCursor')
+    beltRecycle = ArrayField(Int32Field, length_field='beltRecycleCursor')
     splitterPool = ArrayField(lambda: ReaderField(SplitterComponent),
                               length_field='splitterCursor', length_function=decr())
     splitterRecycle = ArrayField(Int32Field, length_field='splitterRecycleCursor')

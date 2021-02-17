@@ -38,9 +38,8 @@ class FactoryStorage(Reader):
     storageCursor = Int32Field()
     storageCapacity = Int32Field()
     storageRecycleCursor = Int32Field()
-    storagePool = ArrayField(lambda: ReaderField(StorageSwitch), length_field='storageCursor', condition_func=decr())
+    storagePool = ArrayField(lambda: ReaderField(StorageSwitch), length_field='storageCursor', length_function=decr())
     storageRecycle = ArrayField(Int32Field, length_field='storageRecycleCursor')
-
     tankCapacity = Int32Field()
     tankCursor = Int32Field()
     tankRecycleCursor = Int32Field()

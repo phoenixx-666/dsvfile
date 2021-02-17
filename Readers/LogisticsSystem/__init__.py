@@ -1,6 +1,7 @@
 from Field import Int32Field, ReaderField, ArrayField, ConditionalField
 from Func import ne, decr
 from Reader import Reader
+from Readers.LogisticsSystem.StationComponent import StationComponent
 
 
 """
