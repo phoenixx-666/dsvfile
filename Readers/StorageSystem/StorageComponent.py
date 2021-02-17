@@ -1,5 +1,6 @@
-from Field import Int32Field, ReaderField, ArrayField
+from Field import Int32Field, ReaderField, ArrayField, ConditionalField, ConditionalBlockStart, ConditionalBlockEnd
 from Field.Enums import EStorageType
+from Func import ge
 from Reader import Reader
 
 
@@ -37,11 +38,13 @@ class StorageComponent(Reader):
     version = Int32Field()
     id = Int32Field()
     entityId = Int32Field()
+    versionCheckStart = ConditionalBlockStart(arg_fields='version', condition_func=ge(1))
     previous = Int32Field()
     next = Int32Field()
     bottom = Int32Field()
     top = Int32Field()
+    versionCheckEnd = ConditionalBlockEnd()
     storageType = EStorageType()
     gridSize = Int32Field()
-    bans = Int32Field()
+    bans = ConditionalField(Int32Field, arg_fields='version', condition_func=ge(1))
     grids = ArrayField(lambda: ReaderField(Grid), length_field='gridSize')

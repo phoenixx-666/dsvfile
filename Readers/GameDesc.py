@@ -1,4 +1,5 @@
-from Field import Int32Field, FloatField, ArrayField
+from Field import Int32Field, FloatField, ArrayField, ConditionalField
+from Func import ge
 from Reader import Reader
 
 
@@ -23,5 +24,5 @@ class GameDesc(Reader):
     galaxySeed = Int32Field()
     starCount = Int32Field()
     playerProto = Int32Field()
-    resourceMultiplier = FloatField()
-    themeIds = ArrayField(Int32Field)
+    resourceMultiplier = ConditionalField(FloatField, arg_fields='version', condition_func=ge(2))
+    themeIds = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(1))

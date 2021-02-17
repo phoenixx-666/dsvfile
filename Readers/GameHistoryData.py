@@ -1,4 +1,5 @@
-from Field import Int32Field, Int64Field, FloatField, BoolField, ReaderField, ArrayField
+from Field import Int32Field, Int64Field, FloatField, BoolField, ReaderField, ArrayField, ConditionalField
+from Func import ge
 from Reader import Reader
 
 """
@@ -61,12 +62,12 @@ class TechState(Reader):
 class GameHistoryData(Reader):
     version = Int32Field()
     recipeUnlocked = ArrayField(Int32Field)
-    tutorialUnlocked = ArrayField(Int32Field)
+    tutorialUnlocked = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(2))
     featureKeys = ArrayField(Int32Field)
     techStates = ArrayField(lambda: ReaderField(TechState))
     autoManageLabItems = BoolField()
     currentTech = Int32Field()
-    techQueue = ArrayField(Int32Field)
+    techQueue = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(1))
     universeObserveLevel = Int32Field()
     solarSailLife = FloatField()
     solarEnergyLossRate = FloatField()

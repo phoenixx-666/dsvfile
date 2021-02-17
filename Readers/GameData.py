@@ -1,10 +1,11 @@
-from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField
+from Field import Int32Field, Int64Field, BoolField, ReaderField, StringField, ConditionalField
+from Func import ge
 from Reader import Reader
 from Readers.GameDesc import GameDesc
 from Readers.GamePrefsData import GamePrefsData
 from Readers.GameHistoryData import GameHistoryData
 from Readers.GameStatData import GameStatData
-from Readers.Player.__init__ import Player
+from Readers.Player import Player
 from Readers.GalacticTransport import GalacticTransport
 
 
@@ -40,10 +41,10 @@ class GameData(Reader):
     gameName = StringField()
     gameDesc = ReaderField(GameDesc)
     gameTick = Int64Field()
-    gamePrefsData = ReaderField(GamePrefsData)
+    gamePrefsData = ConditionalField(lambda: ReaderField(GamePrefsData), arg_fields='version', condition_func=ge(1))
     gameHistoryData = ReaderField(GameHistoryData)
-    hidePlayerModel = BoolField()
-    disableController = BoolField()
+    hidePlayerModel = ConditionalField(BoolField, arg_fields='version', condition_func=ge(2))
+    disableController = ConditionalField(BoolField, arg_fields='version', condition_func=ge(2))
     gameStatData = ReaderField(GameStatData)
     planetId = Int32Field()
     mainPlayer = ReaderField(Player)

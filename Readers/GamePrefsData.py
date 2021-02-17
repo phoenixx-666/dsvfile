@@ -1,4 +1,5 @@
-from Field import Int32Field, FloatField, DoubleField, BoolField, ReaderField, ArrayField
+from Field import Int32Field, FloatField, DoubleField, BoolField, ReaderField, ArrayField, ConditionalField
+from Func import ge
 from Reader import Reader
 from Readers import Int32KVP
 
@@ -39,11 +40,12 @@ class GamePrefsData(Reader):
     cameraURot_y = FloatField()
     cameraURot_z = FloatField()
     cameraURot_w = FloatField()
-    reformCursorSize = Int32Field()
-    replicatorMultipliers = ArrayField(lambda: ReaderField(Int32KVP))
+    reformCursorSize = ConditionalField(Int32Field, arg_fields='version', condition_func=ge(1))
+    replicatorMultipliers = ConditionalField(lambda: ArrayField(lambda: ReaderField(Int32KVP)),
+                                             arg_fields='version', condition_func=ge(1))
     detailPower = BoolField()
     detailVein = BoolField()
     detailSpaceGuide = BoolField()
     detailSign = BoolField()
     detailIcon = BoolField()
-    tutorialShowing = ArrayField(Int32Field)
+    tutorialShowing = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(2))

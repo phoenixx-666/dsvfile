@@ -1,10 +1,19 @@
-from Field import Int32Field, UInt32Field, FloatField, ArrayField, ReaderField
+from Field import Int32Field, UInt32Field, FloatField, ArrayField, ReaderField, ConditionalField
+from Func import ge, decr, decrmul
 from Reader import Reader
 from Readers.Planets.PlanetData import PlanetData
 from Readers.Planets.EntityData import EntityData
 from Readers.Planets.PrebuildData import PrebuildData
 from Readers.Planets.VegeData import VegeData
 from Readers.Planets.VeinData import VeinData
+from Readers.CargoContainer import CargoContainer
+from Readers.CargoTraffic import CargoTraffic
+from Readers.StorageSystem import FactoryStorage
+from Readers.PowerSystem import PowerSystem
+from Readers.FactorySystem import FactorySystem
+from Readers.LogisticsSystem import PlanetTransport
+from Readers.MonsterSystem import MonsterSystem
+from Readers.PlatformSystem import PlatformSystem
 
 """
 PlanetFactory
@@ -116,33 +125,28 @@ class PlanetFactory(Reader):
     entityCapacity = Int32Field()
     entityCursor = Int32Field()
     entityRecycleCursor = Int32Field()
-    entityPool = ArrayField(lambda: ReaderField(EntityData), length_field='entityCursor',
-                            length_function=lambda x: x - 1)
-    entityAnimPool = ArrayField(lambda: ReaderField(EntityAnim), length_field='entityCursor',
-                                length_function=lambda x: x - 1)
-    entitySignPool = ArrayField(lambda: ReaderField(EntitySign), length_field='entityCursor',
-                                length_function=lambda x: x - 1)
-    entityConnPool = ArrayField(Int32Field, length_field='entityCursor', length_function=lambda x: x * 16 - 16)
+    entityPool = ArrayField(lambda: ReaderField(EntityData), length_field='entityCursor',length_function=decr())
+    entityAnimPool = ArrayField(lambda: ReaderField(EntityAnim), length_field='entityCursor', length_function=decr())
+    entitySignPool = ArrayField(lambda: ReaderField(EntitySign), length_field='entityCursor', length_function=decr())
+    entityConnPool = ArrayField(Int32Field, length_field='entityCursor', length_function=decrmul(16))
     entityRecycle = ArrayField(Int32Field, length_field='entityRecycleCursor')
     prebuildCapacity = Int32Field()
     prebuildCursor = Int32Field()
     prebuildRecycleCursor = Int32Field()
-    prebuildPool = ArrayField(lambda: ReaderField(PrebuildData), length_field='prebuildCursor',
-                              length_function=lambda x: x - 1)
-    prebuildConnPool = ArrayField(Int32Field, length_field='prebuildCursor', length_function=lambda x: x * 16 - 16)
+    prebuildPool = ArrayField(lambda: ReaderField(PrebuildData), length_field='prebuildCursor', length_function=decr())
+    prebuildConnPool = ArrayField(Int32Field, length_field='prebuildCursor', length_function=decrmul(16))
     prebuildRecycle = ArrayField(Int32Field, length_field='prebuildRecycleCursor')
     vegeCapacity = Int32Field()
     vegeCursor = Int32Field()
     vegeRecycleCursor = Int32Field()
-    vegePool = ArrayField(lambda: ReaderField(VegeData), length_field='vegeCursor', length_function=lambda x: x - 1)
+    vegePool = ArrayField(lambda: ReaderField(VegeData), length_field='vegeCursor', length_function=decr())
     vegeRecycle = ArrayField(Int32Field, length_field='vegeRecycleCursor')
     veinCapacity = Int32Field()
     veinCursor = Int32Field()
     veinRecycleCursor = Int32Field()
-    veinPool = ArrayField(lambda: ReaderField(VeinData), length_field='veinCursor', length_function=lambda x: x - 1)
+    veinPool = ArrayField(lambda: ReaderField(VeinData), length_field='veinCursor', length_function=decr())
     veinRecycle = ArrayField(Int32Field, length_field='veinRecycleCursor')
-    veinAnimPool = ArrayField(lambda: ReaderField(VeinAnim), length_field='veinCursor', length_function=lambda x: x - 1)
-    """
+    veinAnimPool = ArrayField(lambda: ReaderField(VeinAnim), length_field='veinCursor', length_function=decr())
     cargoContainer = ReaderField(CargoContainer)
     cargoTraffic = ReaderField(CargoTraffic)
     factoryStorage = ReaderField(FactoryStorage)
@@ -150,5 +154,4 @@ class PlanetFactory(Reader):
     factorySystem = ReaderField(FactorySystem)
     planetTransport = ReaderField(PlanetTransport)
     monsterSystem = ReaderField(MonsterSystem)
-    platformSystem = ReaderField(PlatformSystem)
-    """
+    platformSystem = ConditionalField(lambda: ReaderField(PlatformSystem), arg_fields='version', condition_func=ge(1))

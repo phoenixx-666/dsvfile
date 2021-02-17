@@ -1,4 +1,5 @@
-from Field import Int32Field, Int64Field, ReaderField, ArrayField
+from Field import Int32Field, Int64Field, ReaderField, ArrayField, ConditionalField
+from Func import decr, ge
 from Reader import Reader
 
 
@@ -61,7 +62,7 @@ class FactoryProductionStat(Reader):
     productCapacity = Int32Field()
     productCursor = Int32Field()
     productStat = ArrayField(lambda: ReaderField(ProductStat),
-                             length_field='productCursor', length_function=lambda x: x - 1)
+                             length_field='productCursor', length_function=decr())
     powerStat = ArrayField(lambda: ReaderField(PowerStat))
     productIndices = ArrayField(Int32Field)
-    energyConsumption = Int64Field()
+    energyConsumption = ConditionalField(Int64Field, arg_fields='version', condition_func=ge(1))

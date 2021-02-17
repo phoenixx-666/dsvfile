@@ -9,6 +9,7 @@ class IncorrectHeaderException(IOError):
 class Field(object):
     field_counter = 0
     type_name = None
+    hidden = False
 
     def __init__(self):
         self.order = Field.field_counter
@@ -76,6 +77,12 @@ class UInt32Field(FixedSizeNumberField):
     type_name = 'uint32'
     size = 4
     dtype = np.uint32
+
+
+class UInt64Field(FixedSizeNumberField):
+    type_name = 'uint64'
+    size = 8
+    dtype = np.uint64
 
 
 class FloatField(FixedSizeNumberField):
@@ -213,3 +220,58 @@ class ReaderField(Field):
 
     def to_xml(self, name, value, reader):
         return value.to_xml()
+
+
+class ConditionMixin(object):
+    def _check_condition(self, reader):
+        if self.condition_func is None:
+            return True
+        args = [reader.field_values[field] for field in self.arg_fields]
+        return self.condition_func(*args)
+
+
+class ConditionalField(Field, ConditionMixin):
+    def __init__(self, field, arg_fields=[], condition_func=None):
+        self.field = field()
+        self.arg_fields = arg_fields if isinstance(arg_fields, (list, tuple)) else [arg_fields]
+        self.condition_func = condition_func
+        super().__init__()
+
+    def read(self, input_stream, reader):
+        if self._check_condition(reader):
+            return self.field.read(input_stream, reader)
+        return None
+
+    def to_xml(self, name, value, reader):
+        if self._check_condition(reader):
+            return self.field.to_xml(name, value, reader)
+        return None
+
+
+class ConditionalBlockStart(Field, ConditionMixin):
+    hidden = True
+
+    def __init__(self, arg_fields=[], condition_func=None):
+        self.arg_fields = arg_fields if isinstance(arg_fields, (list, tuple)) else [arg_fields]
+        self.condition_func = condition_func
+        super().__init__()
+
+    def read(self, input_stream, reader):
+        reader.skip_fields = self._check_condition(reader)
+        return None
+
+    def to_xml(self, name, value, reader):
+        reader.skip_fields = self._check_condition(reader)
+        return None
+
+
+class ConditionalBlockEnd(Field):
+    hidden = True
+
+    def read(self, input_stream, reader):
+        reader.skip_fields = False
+        return None
+
+    def to_xml(self, name, value, reader):
+        reader.skip_fields = False
+        return None
