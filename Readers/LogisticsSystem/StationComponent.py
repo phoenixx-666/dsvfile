@@ -1,5 +1,5 @@
 from Field import Int32Field, Int64Field, UInt64Field, FloatField, DoubleField, StringField, BoolField, ReaderField, \
-    ArrayField, ConditionalField, ConditionalBlockStart, ConditionalBlockEnd
+    ArrayField, ConditionalField, ConditionalBlockStart
 from Func import g, ge
 from Reader import Reader
 from Readers.LogisticsSystem.DroneData import DroneData
@@ -145,4 +145,3 @@ class StationComponent(Reader):
     warperNecessary = BoolField()
     deliveryDrones = Int32Field()
     deliveryShips = Int32Field()
-    versionCheckEnd = ConditionalBlockEnd()

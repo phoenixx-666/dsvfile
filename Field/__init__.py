@@ -1,5 +1,4 @@
 import numpy as np
-from lxml.etree import Element
 
 
 class IncorrectHeaderException(IOError):
@@ -8,8 +7,10 @@ class IncorrectHeaderException(IOError):
 
 class Field(object):
     field_counter = 0
-    type_name = None
+    type_name = NotImplemented
     hidden = False
+    store_value = True
+    always_read = False
 
     def __init__(self):
         self.order = Field.field_counter
@@ -17,14 +18,6 @@ class Field(object):
 
     def read(self, input_stream, reader):
         raise NotImplementedError
-
-    def visualize(self, value):
-        return '{}'.format(value)
-
-    def to_xml(self, name, value, reader):
-        elem = Element(name, type=self.type_name)
-        elem.text = self.visualize(value)
-        return elem
 
 
 class FixedHeaderField(Field):
@@ -115,14 +108,6 @@ class EnumField(Field):
     def read(self, input_stream, reader):
         return self.field.read(input_stream, reader)
 
-    def to_xml(self, name, value, reader):
-        elem = Element(name, type=self.type_name, attrib={
-            'base-value': str(value),
-            'base-type': self.field.type_name
-        })
-        elem.text = self.enum_values.get(value, str(value))
-        return elem
-
 
 class BoolField(EnumField):
     enum_values = ('False', 'True')
@@ -140,16 +125,12 @@ class StringField(Field):
         length = input_stream.read(1)[0]
         return input_stream.read(length).decode('utf-8')
 
-    def visualize(self, value):
-        if len(value) > 50:
-            return '{}...'.format(value[:50])
-        return value
-
 
 class ByteStringField(Field):
     type_name = 'bytestring'
 
-    def __init__(self, length_field=Int32Field, length_function=None):
+    def __init__(self, format='HEX', length_field=Int32Field, length_function=None):
+        self.format = format
         if isinstance(length_field, str):
             self.length_field = length_field
         else:
@@ -165,12 +146,6 @@ class ByteStringField(Field):
         if self.length_function is not None:
             length = self.length_function(length)
         return input_stream.read(length)
-
-    def visualize(self, value):
-        # if len(value) > 50:
-        #     return '{}...'.format(value[:50])
-        # return super(ByteArrayField, self).visualize(value)
-        return 'Binary data'
 
 
 class ArrayField(Field):
@@ -194,23 +169,6 @@ class ArrayField(Field):
             length = self.length_function(length)
         return [self.item_field.read(input_stream, reader) for i in range(length)]
 
-    def visualize(self, value):
-        return value
-
-    def to_xml(self, name, value, reader):
-        if isinstance(self.length_field, str):
-            length_type = reader.fields[name].type_name
-        else:
-            length_type = self.length_field.type_name
-        elem = Element(name, type=self.type_name, attrib={
-            'length': str(len(value)),
-            'item-type': self.item_field.type_name,
-            'length-type': length_type
-        })
-        for item in value:
-            elem.append(self.item_field.to_xml('ArrayItem', item, reader))
-        return elem
-
 
 class ReaderField(Field):
     type_name = 'struct'
@@ -223,12 +181,6 @@ class ReaderField(Field):
         local_reader = self.reader_class()
         local_reader.read(input_stream)
         return local_reader
-
-    def visualize(self, value):
-        return value
-
-    def to_xml(self, name, value, reader):
-        return value.to_xml()
 
 
 class ConditionMixin(object):
@@ -251,14 +203,11 @@ class ConditionalField(Field, ConditionMixin):
             return self.field.read(input_stream, reader)
         return None
 
-    def to_xml(self, name, value, reader):
-        if self._check_condition(reader):
-            return self.field.to_xml(name, value, reader)
-        return None
-
 
 class ConditionalBlockStart(Field, ConditionMixin):
     hidden = True
+    store_value = False
+    always_read = True
 
     def __init__(self, arg_fields=[], condition_func=None):
         self.arg_fields = arg_fields if isinstance(arg_fields, (list, tuple)) else [arg_fields]
@@ -266,21 +215,13 @@ class ConditionalBlockStart(Field, ConditionMixin):
         super().__init__()
 
     def read(self, input_stream, reader):
-        reader.skip_fields = self._check_condition(reader)
-        return None
-
-    def to_xml(self, name, value, reader):
-        reader.skip_fields = self._check_condition(reader)
-        return None
+        return self._check_condition(reader)
 
 
 class ConditionalBlockEnd(Field):
     hidden = True
+    store_value = False
+    always_read = True
 
     def read(self, input_stream, reader):
-        reader.skip_fields = False
-        return None
-
-    def to_xml(self, name, value, reader):
-        reader.skip_fields = False
         return None

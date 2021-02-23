@@ -12,5 +12,5 @@ class GameSave(Reader):
     releaseGameVersion = Int32Field()
     gameTick = Int64Field()
     nowTicks = Int64Field()
-    screenShotPngFile = ByteStringField()
+    screenShotPngFile = ByteStringField(format='PNG')
     gameData = ReaderField(GameData)

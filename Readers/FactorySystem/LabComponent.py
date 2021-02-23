@@ -1,4 +1,4 @@
-from Field import Int32Field, BoolField, ArrayField, ConditionalBlockStart, ConditionalBlockEnd
+from Field import Int32Field, BoolField, ArrayField, ConditionalBlockStart
 from Func import ne
 from Reader import Reader
 
@@ -63,7 +63,7 @@ class LabComponent(Reader):
     researchMode = BoolField()
     recipeId = Int32Field()
     techId = Int32Field()
-    researchModeAndRecipeIdCheck = ConditionalBlockStart(
+    researchRecipeCheck = ConditionalBlockStart(
         arg_fields=['researchMode', 'recipeId'], condition_func=checker_func)
     timeSpend = Int32Field()
     requires = ArrayField(Int32Field)
@@ -76,5 +76,4 @@ class LabComponent(Reader):
     researchModeCheck = ConditionalBlockStart(arg_fields='researchMode', condition_func=ne(0))
     matrixPoints = ArrayField(Int32Field)
     matrixServed = ArrayField(Int32Field)
-    needs = ArrayField(Int32Field)
-    conditionalBlockEnd = ConditionalBlockEnd()
+    needs2 = ArrayField(Int32Field)

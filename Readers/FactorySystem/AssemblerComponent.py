@@ -1,4 +1,4 @@
-from Field import Int32Field, BoolField, ArrayField, ConditionalBlockStart, ConditionalBlockEnd
+from Field import Int32Field, BoolField, ArrayField, ConditionalBlockStart
 from Field.Enums import ERecipeType
 from Func import g
 from Reader import Reader
@@ -57,4 +57,3 @@ class AssemblerComponent(Reader):
     products = ArrayField(Int32Field)
     productCounts = ArrayField(Int32Field)
     produced = ArrayField(Int32Field)
-    conditionalBlockEnd = ConditionalBlockEnd()

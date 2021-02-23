@@ -45,5 +45,5 @@ class EVeinType(EnumField):
                    'Grat', 'Bamboo', 'Mag')
 
 
-class EVeinType16(EnumField):
+class EVeinType16(EVeinType):
     base_type = Int16Field

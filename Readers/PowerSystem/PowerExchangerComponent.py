@@ -1,6 +1,7 @@
-from Field import Int16Field, Int32Field, Int64Field, FloatField, BoolField, ConditionalBlockStart, ConditionalBlockEnd
+from Field import Int16Field, Int32Field, Int64Field, FloatField, BoolField, ConditionalBlockStart
 from Func import ge
 from Readers import Reader
+
 
 """
 PowerExchangerComponent
@@ -33,6 +34,7 @@ PowerExchangerComponent
 }
 """
 
+
 class PowerExchangerComponent(Reader):
     version = Int32Field()
     id = Int32Field()
@@ -60,4 +62,3 @@ class PowerExchangerComponent(Reader):
     inputSlot = Int32Field()
     outputRectify = Int32Field()
     inputRectify = Int32Field()
-    versionCheckEnd = ConditionalBlockEnd()

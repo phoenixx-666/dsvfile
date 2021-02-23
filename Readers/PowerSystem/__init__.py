@@ -50,7 +50,7 @@ PowerSystem
 """
 
 
-class PowerNetworkSwitch(ReaderField):
+class PowerNetworkSwitch(Reader):
     powerNetworkIncludedFlag = Int32Field()
     netPool = ConditionalField(lambda: ReaderField(PowerNetwork),
                                arg_fields='powerNetworkIncludedFlag', condition_func=eq(1))

@@ -85,7 +85,7 @@ PlanetFactory
 """
 
 
-class EntityAnim(Reader):
+class Anim(Reader):
     time = FloatField()
     prepare_length = FloatField()
     working_length = FloatField()
@@ -110,14 +110,6 @@ class EntitySign(Reader):
     w = FloatField()
 
 
-class VeinAnim(Reader):
-    time = FloatField()
-    prepare_length = FloatField()
-    working_length = FloatField()
-    state = UInt32Field()
-    power = FloatField()
-
-
 class PlanetFactory(Reader):
     version = Int32Field()
     planetId = Int32Field()
@@ -125,8 +117,8 @@ class PlanetFactory(Reader):
     entityCapacity = Int32Field()
     entityCursor = Int32Field()
     entityRecycleCursor = Int32Field()
-    entityPool = ArrayField(lambda: ReaderField(EntityData), length_field='entityCursor',length_function=decr())
-    entityAnimPool = ArrayField(lambda: ReaderField(EntityAnim), length_field='entityCursor', length_function=decr())
+    entityPool = ArrayField(lambda: ReaderField(EntityData), length_field='entityCursor', length_function=decr())
+    entityAnimPool = ArrayField(lambda: ReaderField(Anim), length_field='entityCursor', length_function=decr())
     entitySignPool = ArrayField(lambda: ReaderField(EntitySign), length_field='entityCursor', length_function=decr())
     entityConnPool = ArrayField(Int32Field, length_field='entityCursor', length_function=decrmul(16))
     entityRecycle = ArrayField(Int32Field, length_field='entityRecycleCursor')
@@ -146,7 +138,7 @@ class PlanetFactory(Reader):
     veinRecycleCursor = Int32Field()
     veinPool = ArrayField(lambda: ReaderField(VeinData), length_field='veinCursor', length_function=decr())
     veinRecycle = ArrayField(Int32Field, length_field='veinRecycleCursor')
-    veinAnimPool = ArrayField(lambda: ReaderField(VeinAnim), length_field='veinCursor', length_function=decr())
+    veinAnimPool = ArrayField(lambda: ReaderField(Anim), length_field='veinCursor', length_function=decr())
     cargoContainer = ReaderField(CargoContainer)
     cargoTraffic = ReaderField(CargoTraffic)
     factoryStorage = ReaderField(FactoryStorage)
