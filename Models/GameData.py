@@ -8,6 +8,7 @@ from Models.GameStatData import GameStatData
 from Models.Player import Player
 from Models.GalacticTransport import GalacticTransport
 from Models.Planets import PlanetFactory
+from Models.DysonSphere import DysonSphereSwitch
 
 
 """
@@ -28,8 +29,7 @@ GameData
     GalacticTransport
     PlanetFactory[factoryCount]
     int32 galaxyStarCount: Must equal GameDesc::starCount or the game will crash.
-    int32 numDysonSpheres
-    [numDysonSpheres] {
+    [galaxyStarCount] {
         int32 dysonSphereDataIsAvailableFlag: Must be 0 or 1 or the game will crash.
         DysonSphere (dysonSphereDataIsAvailableFlag == 1)
     }
@@ -53,3 +53,4 @@ class GameData(Model):
     galacticTransport = ModelField(GalacticTransport)
     planetFactory = ArrayField(lambda: ModelField(PlanetFactory), length_field='factoryCount')
     galaxyStarCount = Int32Field()
+    dysonSpheres = ArrayField(lambda: ModelField(DysonSphereSwitch), length_field='galaxyStarCount')

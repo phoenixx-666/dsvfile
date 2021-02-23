@@ -8,9 +8,7 @@ class Model(object):
         fields = [(fname, field) for fname, field in self.__class__.__dict__.items() if isinstance(field, Field)]
         fields.sort(key=lambda c: c[1].order)
         self._fields_ordered = fields
-        self._hidden_fields = tuple(fname for fname, field in fields if field.hidden)
         self._open_fields = tuple(fname for fname, field in fields if not field.hidden)
-        self._all_field_names = tuple(fname for fname, field in fields)
         self.fields = {fname: field for fname, field in fields}
         self.field_values = {fname: None for fname, field in fields if field.store_value}
 
