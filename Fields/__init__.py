@@ -1,4 +1,4 @@
-import numpy as np
+from struct import unpack
 
 
 class IncorrectHeaderException(IOError):
@@ -23,71 +23,71 @@ class Field(object):
 class FixedHeaderField(Field):
     type_name = 'header'
 
-    def __init__(self, header):
+    def __init__(self, header, encoding='ISO 8859-1'):
         self.header = header
+        self.encoding = encoding
         super().__init__()
 
     def read(self, input_stream, model):
-        if input_stream.read(len(self.header)).decode('ISO 8859-1') != self.header:
+        if input_stream.read(len(self.header)).decode(self.encoding) != self.header:
             raise IncorrectHeaderException
         return self.header
 
 
 class FixedSizeNumberField(Field):
     size = None
-    dtype = None
+    fmt = None
 
     def read(self, input_stream, model):
-        cls = self.__class__
-        return np.frombuffer(input_stream.read(cls.size), dtype=cls.dtype)[0]
+        return unpack(self.fmt, input_stream.read(self.size))[0]
 
 
 class UInt8Field(FixedSizeNumberField):
     type_name = 'uint8'
     size = 1
-    dtype = np.uint8
+    fmt = '<B'
 
 
 class Int16Field(FixedSizeNumberField):
     type_name = 'int16'
     size = 2
-    dtype = np.int16
+    fmt = '<h'
 
 
 class Int32Field(FixedSizeNumberField):
     type_name = 'int32'
     size = 4
-    dtype = np.int32
+    fmt = '<l'
 
 
 class Int64Field(FixedSizeNumberField):
     type_name = 'int64'
     size = 8
-    dtype = np.int64
+    fmt = '<q'
 
 
 class UInt32Field(FixedSizeNumberField):
     type_name = 'uint32'
     size = 4
-    dtype = np.uint32
+    fmt = '<L'
 
 
 class UInt64Field(FixedSizeNumberField):
     type_name = 'uint64'
     size = 8
-    dtype = np.uint64
+    fmt = '<Q'
 
 
 class FloatField(FixedSizeNumberField):
     type_name = 'float'
     size = 4
-    dtype = np.float32
+    fmt = '<f'
 
 
 class DoubleField(FixedSizeNumberField):
     type_name = 'double'
     size = 8
-    dtype = np.double
+    fmt = '<d'
 
 
 class EnumField(Field):
