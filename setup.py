@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(name='dsvfile',
@@ -7,5 +7,5 @@ setup(name='dsvfile',
       url='http://github.com/phoenixx-666/dsvfile',
       author='phoenixx-666',
       license='MIT',
-      packages=['dsvfile'],
+      packages=find_packages(),
       zip_safe=False)
