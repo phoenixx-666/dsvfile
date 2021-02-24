@@ -1,4 +1,4 @@
-from struct import unpack
+from struct import unpack, pack
 
 
 class IncorrectHeaderException(IOError):
@@ -19,6 +19,9 @@ class Field(object):
     def read(self, input_stream, model):
         raise NotImplementedError
 
+    def write(self, value, output_stream, model):
+        raise NotImplementedError
+
 
 class FixedHeaderField(Field):
     type_name = 'header'
@@ -33,6 +36,9 @@ class FixedHeaderField(Field):
             raise IncorrectHeaderException
         return self.header
 
+    def write(self, value, output_stream, model):
+        output_stream.write(self.header.encode(self.encoding))
+
 
 class FixedSizeNumberField(Field):
     size = None
@@ -40,6 +46,9 @@ class FixedSizeNumberField(Field):
 
     def read(self, input_stream, model):
         return unpack(self.fmt, input_stream.read(self.size))[0]
+
+    def write(self, value, output_stream, model):
+        output_stream.write(pack(self.fmt, value))
 
 
 class UInt8Field(FixedSizeNumberField):
@@ -108,6 +117,9 @@ class EnumField(Field):
     def read(self, input_stream, model):
         return self.field.read(input_stream, model)
 
+    def write(self, value, output_stream, model):
+        self.field.write(value, output_stream, model)
+
 
 class BoolField(EnumField):
     enum_values = ('False', 'True')
@@ -123,7 +135,11 @@ class StringField(Field):
 
     def read(self, input_stream, model):
         length = input_stream.read(1)[0]
-        return input_stream.read(length).decode('utf-8')
+        return input_stream.read(length).decode(self.encoding)
+
+    def write(self, value, output_stream, model):
+        value = value.encode(self.encoding)
+        output_stream.write(pack('B', len(value)) + value)
 
 
 class ByteStringField(Field):
@@ -147,6 +163,18 @@ class ByteStringField(Field):
             length = self.length_func(length)
         return input_stream.read(length)
 
+    def write(self, value, output_stream, model):
+        if isinstance(self.length_field, str):
+            length = model.__getattribute__(self.length_field)
+            if self.length_func is not None:
+                length = self.length_func(length)
+            if length != len(value):
+                raise ValueError('Value length does not match one specified by {0}'.format(self.length_field))
+        else:
+            length = len(value)
+            self.length_field.write(length, output_stream, model)
+        output_stream.write(value)
+
 
 class ArrayField(Field):
     type_name = 'array'
@@ -169,6 +197,19 @@ class ArrayField(Field):
             length = self.length_func(length)
         return [self.item_field.read(input_stream, model) for i in range(length)]
 
+    def write(self, value, output_stream, model):
+        if isinstance(self.length_field, str):
+            length = model.__getattribute__(self.length_field)
+            if self.length_func is not None:
+                length = self.length_func(length)
+            if length != len(value):
+                raise ValueError('Value length does not match one specified by {0}'.format(self.length_field))
+        else:
+            length = len(value)
+            self.length_field.write(length, output_stream, model)
+        for item in value:
+            self.item_field.write(item, output_stream, model)
+
 
 class ModelField(Field):
     type_name = 'struct'
@@ -181,6 +222,10 @@ class ModelField(Field):
         local_model = self.model_class()
         local_model.read(input_stream)
         return local_model
+
+    def write(self, value, output_stream, model):
+        if value:
+            value.write(output_stream)
 
 
 class ConditionMixin(object):
@@ -203,6 +248,10 @@ class ConditionalField(Field, ConditionMixin):
             return self.field.read(input_stream, model)
         return None
 
+    def write(self, value, output_stream, model):
+        if self._check_condition(model):
+            self.field.write(value, output_stream, model)
+
 
 class ConditionalBlockStart(Field, ConditionMixin):
     hidden = True
@@ -217,6 +266,9 @@ class ConditionalBlockStart(Field, ConditionMixin):
     def read(self, input_stream, model):
         return self._check_condition(model)
 
+    def write(self, value, output_stream, model):
+        pass
+
 
 class ConditionalBlockEnd(Field):
     hidden = True
@@ -225,3 +277,6 @@ class ConditionalBlockEnd(Field):
 
     def read(self, input_stream, model):
         return None
+
+    def write(self, value, output_stream, model):
+        pass

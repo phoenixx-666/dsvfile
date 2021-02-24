@@ -19,6 +19,8 @@ pip install .
 
 ## Usage
 
+### Parsing
+
 ```python
 from dsvfile import GameSave
 
@@ -48,6 +50,21 @@ s = GameSave()
 s.read(bio)
 ``` 
 
+### Editing
+
+This library supports editing and saving data. Theoretically, you can even build a new save file from scratch.
+
+Currently, the library does not provide many foolproof features, so edit at your own risk. 
+
+### Saving
+
+Once you've finished editing properties of your GameSave object, you will be able to convert it back to the .dsv format: 
+
+```python
+with open('save_file_edited.dsv', 'wb') as f:
+    s.write(f)
+```
+
 ## Note
 
-As the library has not been extensively tested, use it at your own risk.
+As the library has not been extensively tested overall, use it at your own risk.
