@@ -4,29 +4,6 @@ from ...Func import ge
 from . import Model, Int32Field, ModelField, ArrayField, ConditionalField
 
 
-"""
-StorageComponent
-{
-    int32 version = 1
-    int32 id
-    int32 entityId
-    int32 previous (version >= 1)
-    int32 next (version >= 1)
-    int32 bottom (version >= 1)
-    int32 top (version >= 1)
-    int32 EStorageType type (0:Default 1:Fuel 9:Filtered)
-    int32 gridSize
-    int32 bans (version >= 1)
-    grids[gridSize] {
-        int32 itemId
-        int32 filter
-        int32 count
-        int32 stackSize
-    }
-}
-"""
-
-
 class Grid(Model):
     itemId = Int32Field()
     filter = Int32Field()

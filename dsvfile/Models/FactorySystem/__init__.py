@@ -10,49 +10,6 @@ from .SiloComponent import SiloComponent
 from .LabComponent import LabComponent
 
 
-"""
-FactorySystem
-{
-    int32 version = 0
-    int32 minerCapacity
-    int32 minerCursor
-    int32 minerRecycleCursor
-    MinerComponent minerPool[minerCursor - 1]
-    int32 minerRecycle[minerRecycleCursor]
-    int32 inserterCapacity
-    int32 inserterCursor
-    int32 inserterRecycleCursor
-    InserterComponent inserterPool[inserterCursor - 1]
-    int32 inserterRecycle[inserterRecycleCursor]
-    int32 assemblerCapacity
-    int32 assemblerCursor
-    int32 assemblerRecycleCursor
-    AssemblerComponent assemblerPool[assemblerCursor - 1]
-    int32 assemblerRecycle[assemblerRecycleCursor]
-    int32 fractionateCapacity
-    int32 fractionateCursor
-    int32 fractionateRecycleCursor
-    FractionateComponent fractionatePool[fractionateCursor - 1]
-    int32 fractionateRecycle[fractionateRecycleCursor]
-    int32 ejectorCapacity
-    int32 ejectorCursor
-    int32 ejectorRecycleCursor
-    EjectorComponent ejectorPool[ejectorCursor - 1]
-    int32 ejectorRecycle[ejectorRecycleCursor]
-    int32 siloCapacity
-    int32 siloCursor
-    int32 siloRecycleCursor
-    SiloComponent siloPool[siloCursor - 1]
-    int32 siloRecycle[siloRecycleCursor]
-    int32 labCapacity
-    int32 labCursor
-    int32 labRecycleCursor
-    LabComponent labPool[labCursor - 1]
-    int32 labRecycle[labRecycleCursor]
-}
-"""
-
-
 class FactorySystem(Model):
     version = Int32Field()
     minerCapacity = Int32Field()

@@ -3,30 +3,6 @@ from ...Fields.Enums import EMinerType, EWorkState
 from . import Model, Int32Field, ArrayField
 
 
-"""
-MinerComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 pcId
-    int32 EMinerType type (None, Water, Vein, Oil)
-    int32 speed
-    int32 time
-    int32 period
-    int32 insertTarget
-    int32 EWorkState workstate (Idle, Running, Outputing, Lack, Full)
-    int32 veinCount
-    int32 veins[veinCount]
-    int32 currentVeinIndex
-    int32 minimumVeinAmount
-    int32 productId
-    int32 productCount
-    uint32 seed
-}
-"""
-
-
 class MinerComponent(Model):
     version = Int32Field()
     id = Int32Field()

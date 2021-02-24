@@ -3,21 +3,6 @@ from ..Func import ge
 from . import Model, Int32Field
 
 
-"""
-GameDesc
-{
-    int32 version = 2
-    int32 galaxyAlgo
-    int32 galaxySeed
-    int32 starCount
-    int32 playerProto
-    float resourceMultiplier (version >= 2)
-    int32 numThemeIds (version >= 1)
-    int32 themeIds[numThemeIds] (version >= 1)
-}
-"""
-
-
 class GameDesc(Model):
     version = Int32Field()
     galaxyAlgo = Int32Field()

@@ -2,42 +2,6 @@ from ...Fields import UInt8Field, Int16Field
 from . import Model, Int32Field, FloatField
 
 
-"""
-EntityData
-{
-    uint8 version = 0
-    int32 id
-    int16 protoId
-    int16 modelIndex
-    float pos_x
-    float pos_y
-    float pos_z
-    float rot_x
-    float rot_y
-    float rot_z
-    float rot_w
-    int32 beltId
-    int32 splitterId
-    int32 storageId
-    int32 tankId
-    int32 minerId
-    int32 inserterId
-    int32 assemblerId
-    int32 fractionateId
-    int32 ejectorId
-    int32 siloId
-    int32 labId
-    int32 stationId
-    int32 powerNodeId
-    int32 powerGenId
-    int32 powerConId
-    int32 powerAccId
-    int32 powerExcId
-    int32 monsterId
-}
-"""
-
-
 class EntityData(Model):
     version = UInt8Field()
     id = Int32Field()

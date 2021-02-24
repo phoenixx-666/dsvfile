@@ -2,33 +2,6 @@ from ..Fields import FloatField, DoubleField, BoolField, ModelField, ArrayField,
 from ..Func import ge
 from . import Model, Int32KVP, Int32Field
 
-"""
-GamePrefsData
-{
-    int32 version = 2
-    double cameraUPos_x
-    double cameraUPos_y
-    double cameraUPos_z
-    float cameraURot_x
-    float cameraURot_y
-    float cameraURot_z
-    float cameraURot_w
-    int32 reformCursorSize (version >= 1)
-    int32 numReplicatorMultipliers (version >= 1)
-    replicatorMultipliers[numReplicatorMultipliers] (version >= 1) {
-        int32 key
-        int32 value
-    }
-    uint8_bool detailPower
-    uint8_bool detailVein
-    uint8_bool detailSpaceGuide
-    uint8_bool detailSign
-    uint8_bool detailIcon
-    int32 numTutorialShowing (version >= 2)
-    int32 tutorialShowing[numTutorialShowing] (version >= 2)
-}
-"""
-
 
 class GamePrefsData(Model):
     version = Int32Field()

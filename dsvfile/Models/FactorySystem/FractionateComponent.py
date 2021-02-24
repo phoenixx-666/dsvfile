@@ -2,37 +2,6 @@ from ...Fields import UInt32Field, FloatField, BoolField
 from . import Model, Int32Field
 
 
-"""
-FractionateComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 pcId
-    int32 belt0
-    int32 belt1
-    int32 belt2
-    uint8_bool isOutput0
-    uint8_bool isOutput1
-    uint8_bool isOutput2
-    uint8_bool isWorking
-    float produceProb
-    int32 need
-    int32 product
-    int32 needCurrCount
-    int32 productCurrCount
-    int32 oriProductCurrCount
-    int32 progress
-    uint8_bool isRand
-    uint8_bool fractionateSuccess
-    int32 needMaxCount
-    int32 productMaxCount
-    int32 oriProductMaxCount
-    uint32 seed
-}
-"""
-
-
 class FractionateComponent(Model):
     version = Int32Field()
     id = Int32Field()

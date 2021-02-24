@@ -2,39 +2,6 @@ from ...Fields import FloatField, BoolField
 from . import Model, Int32Field
 
 
-"""
-EjectorComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 planetId
-    int32 pcId
-    int32 direction
-    int32 time
-    uint8_bool fired
-    int32 chargeSpend
-    int32 coldSpend
-    int32 bulletId
-    int32 bulletCount
-    int32 orbitId
-    float pivotY
-    float muzzleY
-    float localPosN_x
-    float localPosN_y
-    float localPosN_z
-    float localAlt
-    float localRot_x
-    float localRot_y
-    float localRot_z
-    float localRot_w
-    float localDir_x
-    float localDir_y
-    float localDir_z
-}
-"""
-
-
 class EjectorComponent(Model):
     version = Int32Field()
     id = Int32Field()

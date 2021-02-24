@@ -3,28 +3,6 @@ from ...Fields.Enums import EVeinType16
 from . import Model, Int32Field, FloatField
 
 
-"""
-VeinData
-{
-    uint8 version = 0
-    int32 id
-    int16 EVeinType (see above)
-    int16 modelIndex
-    int16 groupIndex
-    int32 amount
-    int32 productId
-    float pos_x
-    float pos_y
-    float pos_z
-    int32 minerCount
-    int32 minerId0
-    int32 minerId1
-    int32 minerId2
-    int32 minerId3
-}
-"""
-
-
 class VeinData(Model):
     version = UInt8Field()
     id = Int32Field()

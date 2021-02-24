@@ -2,56 +2,6 @@ from ...Fields import FloatField
 from . import Model, Int32Field, ModelField, ArrayField
 
 
-"""
-DysonShell
-{
-    int32 version = 0
-    int32 id
-    int32 protoId
-    int32 layerId
-    int32 randSeed
-    int32 numPolygon
-    polygon[numPolygon] {
-        float item_x
-        float item_y
-        float item_z
-    }
-    int32 numDysonNode
-    int32 nodeId[numDysonNode]: Must be an existing ID or the game will crash.
-    int32 vertexCount
-    int32 triangleCount
-    int32 numVerts
-    verts[numVerts] {
-        float x
-        float y
-        float z
-    }
-    int32 numPqArr
-    pqArr[numPqArr] {
-        int32 x
-        int32 y
-    }
-    int32 numTris
-    int32 tris[numTris]
-    int32 numVAdjs
-    int32 vAdjs[numVAdjs]
-    int32 numVertAttr
-    int32 vertAttr[numVertAttr]
-    int32 numVertsq
-    int32 vertsq[numVertsq]
-    int32 numVertsqOffset
-    int32 vertsqOffset[numVertsqOffset]
-    int32 numNodecps
-    int32 nodecps[numNodecps]
-    int32 numVertcps
-    int32 vertcps[numVertcps]
-    int32 vertRecycleArraySize
-    int32 vertRecycleCursor
-    int32 vertRecycle[vertRecycleCursor]
-}
-"""
-
-
 class Point(Model):
     x = Int32Field()
     y = Int32Field()

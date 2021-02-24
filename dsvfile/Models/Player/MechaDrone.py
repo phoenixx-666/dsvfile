@@ -1,31 +1,6 @@
 from . import Model, Int32Field, FloatField
 
 
-"""
-MechaDrone
-{
-    int32 version = 0
-    int32 stage
-    float position_x
-    float position_y
-    float position_z
-    float target_x
-    float target_y
-    float target_z
-    float forward_x
-    float forward_y
-    float forward_z
-    float speed
-    int32 movement
-    int32 targetObject
-    float progress
-    float initialVector_x
-    float initialVector_y
-    float initialVector_z
-}
-"""
-
-
 class MechaDrone(Model):
     version = Int32Field()
     stage = Int32Field()

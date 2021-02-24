@@ -4,22 +4,6 @@ from .. import Model, Int32Field
 from .StationComponent import StationComponent
 
 
-"""
-PlanetTransport
-{
-    int32 version = 0
-    int32 stationCursor
-    int32 stationCapacity
-    int32 stationRecycleCursor
-    [stationCursor - 1] {
-        int32 stationIndex
-        StationComponent stationPool (stationIndex != 0)
-    }
-    int32 stationRecycle[stationRecycleCursor]
-}
-"""
-
-
 class StationComponentSwitch(Model):
     stationIndex = Int32Field()
     stationPool = ConditionalField(lambda: ModelField(StationComponent),

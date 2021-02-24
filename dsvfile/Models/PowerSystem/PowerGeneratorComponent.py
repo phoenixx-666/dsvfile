@@ -2,38 +2,6 @@ from ...Fields import Int16Field, Int64Field, FloatField, BoolField
 from . import Model, Int32Field
 
 
-"""
-PowerGeneratorComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 networkId
-    uint8_bool photovoltaic
-    uint8_bool wind
-    uint8_bool gamma
-    int64 genEnergyPerTick
-    int64 useFuelPerTick
-    int16 fuelMask
-    int64 fuelEnergy
-    int16 curFuelId
-    int16 fuelId
-    int16 fuelCount
-    int64 fuelHeat
-    int32 catalystId
-    int32 catalystPoint
-    int32 productId
-    float productCount
-    int64 productHeat
-    float warmup
-    float ionEnhance
-    float x
-    float y
-    float z
-}
-"""
-
-
 class PowerGeneratorComponent(Model):
     version = Int32Field()
     id = Int32Field()

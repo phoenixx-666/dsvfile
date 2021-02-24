@@ -1,24 +1,6 @@
 from . import Model, Int32Field, ModelField, ArrayField
 from .PowerNetworkNode import PowerNetworkNode
 
-"""
-PowerNetwork
-{
-    int32 version = 0
-    int32 id
-    int32 numNodes
-    int32 numConsumers
-    int32 numGenerators
-    int32 numAccumulators
-    int32 numExchangers
-    PowerNetworkStructures::Node[numNodes]
-    int32 consumers[numConsumers]
-    int32 generators[numGenerators]
-    int32 accumulators[numAccumulators]
-    int32 exchangers[numExchangers]
-}
-"""
-
 
 class PowerNetwork(Model):
     version = Int32Field()

@@ -1,20 +1,6 @@
 from ..Fields import ModelField, ArrayField
 from . import Model, Int32Field
-from.FactoryProductionStat import FactoryProductionStat
-
-
-"""
-ProductionStatistics
-{
-    int32 version = 0
-    int32 numFactoryStatPool
-    FactoryProductionStat factoryStatPool[numFactoryStatPool]
-    int32 numFirstCreateIds
-    int32 firstCreateIds[numFirstCreateIds]
-    int32 numFavoriteIds
-    int32 favoriteIds[numFavoriteIds]
-}
-"""
+from .FactoryProductionStat import FactoryProductionStat
 
 
 class ProductionStatistics(Model):

@@ -5,28 +5,6 @@ from .StorageComponent import StorageComponent
 from .TankComponent import TankComponent
 
 
-"""
-FactoryStorage
-{
-    int32 version = 0
-    int32 storageCursor
-    int32 storageCapacity
-    int32 storageRecycleCursor
-    [storageCursor - 1] {
-        int32 storagePoolIndex
-        int32 size (storagePoolIndex != 0)
-        StorageComponent storagePool (storagePoolIndex != 0)
-    }
-    int32 storageRecycle[storageRecycleCursor]
-    int32 tankCapacity
-    int32 tankCursor
-    int32 tankRecycleCursor
-    TankComponent tankPool[tankCursor]
-    int32 tankRecycle[tankRecycleCursor]
-}
-"""
-
-
 class StorageSwitch(Model):
     storagePoolIndex = Int32Field()
     size = ConditionalField(Int32Field, arg_fields='storagePoolIndex', condition_func=ne(0))

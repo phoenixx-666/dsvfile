@@ -2,28 +2,6 @@ from ...Fields import UInt8Field, Int16Field
 from . import Model, Int32Field, FloatField
 
 
-"""
-VegeData
-{
-    uint8 version = 0
-    int32 id
-    int16 protoId
-    int16 modelIndex
-    int16 hp
-    float pos_x
-    float pos_y
-    float pos_z
-    float rot_x
-    float rot_y
-    float rot_z
-    float rot_w
-    float scl_x
-    float scl_y
-    float scl_z
-}
-"""
-
-
 class VegeData(Model):
     version = UInt8Field()
     id = Int32Field()

@@ -5,65 +5,6 @@ from .SailOrbit import SailOrbit
 from .SailBullet import SailBullet
 
 
-"""
-DysonSwarm
-{
-    int32 version = 4
-    (version >= 1) {
-        int32 randSeed
-        int32 sailCapacity
-        int32 sailCursor
-        int32 sailRecycleCursor
-        sailPoolForSave[sailCursor] {
-            float st
-            float px
-            float py
-            float pz
-            float vx
-            float vy
-            float vz
-            float gs
-        }
-        sailInfos[sailCursor] {
-            uint32 orbit
-            uint32 node (version >= 3)
-            uint32 kill (version >= 3)
-            float posr_x (version >= 4)
-            float posr_y (version >= 4)
-            float posr_z (version >= 4)
-        }
-        int32 sailRecycle[sailRecycleCursor]
-        int32 orbitCapacity
-        int32 orbitCursor
-        SailOrbit orbits[orbitCursor - 1]
-        int32 numExpiryOrder: Must match sailCapacity or the game will crash.
-        int32 expiryCursor
-        int32 expiryEnding
-        [numExpiryOrder] {
-            int64 time
-            int32 index
-        }
-        (version >= 2) {
-            int32 numAbsorbOrder: Must match sailCapacity or the game will crash.
-            int32 absorbCursor
-            int32 absorbEnding
-            absorbOrder[numAbsorbOrder] {
-                int64 time
-                int32 index
-                int32 layer
-                int32 node
-            }
-        }
-        int32 bulletCapacity
-        int32 bulletCursor
-        int32 bulletRecycleCursor
-        SailBullet bulletPool[bulletCursor - 1]
-        int32 bulletRecycle[bulletRecycleCursor]
-    }
-}
-"""
-
-
 class Sail(Model):
     st = FloatField()
     px = FloatField()

@@ -2,31 +2,6 @@ from ...Fields import BoolField
 from . import Model, Int32Field
 
 
-"""
-SplitterComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 beltA
-    int32 beltB
-    int32 beltC
-    int32 beltD
-    int32 input0
-    int32 input1
-    int32 input2
-    int32 input3
-    int32 output0
-    int32 output1
-    int32 output2
-    int32 output3
-    uint8_bool inPriority
-    uint8_bool outPriority
-    int32 outFilter
-}
-"""
-
-
 class SplitterComponent(Model):
     version = Int32Field()
     id = Int32Field()

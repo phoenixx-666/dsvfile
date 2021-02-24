@@ -3,45 +3,6 @@ from ..Func import decr, ge
 from . import Model, Int32Field
 
 
-"""
-FactoryProductionStat
-{
-    int32 version = 1
-    int32 productCapacity
-    int32 productCursor
-    ProductStat productPool[productCursor - 1]
-    int32 numPowerPool, max 5
-    PowerStat powerPool[numPowerPool]
-    int32 numProductIndices
-    int32 productIndices[numProductIndices]
-    int64 energyConsumption (version >= 1)
-}
-
-ProductStat
-{
-    int32 version = 0
-    int32 numCount:  Saved as 7200.  Reads more or less, but only stores up to 7200, and enforces abs.
-    int32 count[numCount]
-    int32 numCursor:  Saved as 12.  Reads more or less, but only stores up to 12.
-    int32 cursor[numCount]
-    int32 numTotal:  Saved as 14.  Reads more or less, but only stores up to 14, and enforces abs.
-    int32 total[numCount]
-    int32 itemId
-}
-
-PowerStat
-{
-    int32 version = 0
-    int32 numEnergy:  Saved as 3600.  Reads more or less, but only stores up to 3600, and enforces abs.
-    int64 energy[numCount]
-    int32 numCursor:  Saved as 6.  Reads more or less, but only stores up to 6.
-    int32 cursor[numCount]
-    int32 numTotal:  Saved as 7.  Reads more or less, but only stores up to 7, and enforces abs.
-    int64 total[numCount]
-}
-"""
-
-
 class ProductStat(Model):
     version = Int32Field()
     count = ArrayField(Int32Field)

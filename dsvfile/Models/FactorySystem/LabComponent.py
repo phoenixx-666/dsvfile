@@ -3,50 +3,6 @@ from ...Func import ne
 from . import Model, Int32Field, ArrayField
 
 
-"""
-LabComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 pcId
-    int32 nextLabId
-    uint8_bool replicating
-    uint8_bool outputing
-    int32 time
-    int32 hashBytes
-    uint8_bool researchMode
-    int32 recipeId
-    int32 techId
-    (not researchMode and recipeId > 0) {
-        int32 timeSpend
-        int32 numRequires
-        int32 requires[numRequires]
-        int32 numRequireCounts
-        int32 requireCounts[numRequireCounts]
-        int32 numServed
-        int32 served[numServed]
-        int32 numNeeds
-        int32 needs[numNeeds]
-        int32 numProducts
-        int32 products[numProducts]
-        int32 numProductCounts
-        int32 productCounts[numProductCounts]
-        int32 numProduced
-        int32 produced[numProduced]
-    }
-    (researchMode) {
-        int32 numMatrixPoints
-        int32 matrixPoints[numMatrixPoints]
-        int32 numMatrixServed
-        int32 matrixServed[numMatrixServed]
-        int32 numNeeds
-        int32 needs[numNeeds]
-    }
-}
-"""
-
-
 checker_func = lambda researchMode, recipeId: researchMode == 0 and recipeId > 0
 
 

@@ -3,38 +3,6 @@ from ...Func import mul
 from . import Model, Int32Field, ModelField, ArrayField
 
 
-"""
-CargoPath
-{
-    int32 version = 0
-    int32 id
-    int32 capacity
-    int32 bufferLength
-    int32 chunkCapacity
-    int32 chunkCount
-    int32 updateLen
-    uint8_bool closed
-    int32 outputPathIdForImport
-    int32 outputIndex
-    int32 numBelts
-    int32 numInputPaths
-    uint8 buffer[bufferLength]
-    int32 chunks[chunkCount * 3]
-    [bufferLength] {
-        float pointPos_x
-        float pointPos_y
-        float pointPos_z
-        float pointRot_x
-        float pointRot_y
-        float pointRot_z
-        float pointRot_w
-    }
-    int32 belts[numBelts]
-    int32 inputPaths[numInputPaths]
-}
-"""
-
-
 class Point(Model):
     pointPos_x = FloatField()
     pointPos_y = FloatField()

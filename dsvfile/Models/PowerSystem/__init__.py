@@ -9,47 +9,6 @@ from .PowerExchangerComponent import PowerExchangerComponent
 from .PowerNetwork import PowerNetwork
 
 
-"""
-PowerSystem
-{
-    int32 version = 0
-    int32 generatorCapacity
-    int32 genCursor
-    int32 genRecycleCursor
-    PowerGeneratorComponent genPool[genCursor - 1]
-    int32 genRecycle[genRecycleCursor]
-    int32 nodeCapacity
-    int32 nodeCursor
-    int32 nodeRecycleCursor
-    PowerNodeComponent nodePool[nodeCursor - 1]
-    int32 nodeRecycle[nodeRecycleCursor]
-    int32 consumerCapacity
-    int32 consumerCursor
-    int32 consumerRecycleCursor
-    PowerConsumerComponent consumerPool[consumerCursor - 1]
-    int32 consumerRecycle[consumerRecycleCursor]
-    int32 accumulatorCapacity
-    int32 accCursor
-    int32 accRecycleCursor
-    PowerAccumulatorComponent accPool[accCursor - 1]
-    int32 accRecycle[accRecycleCursor]
-    int32 exchangerCapacity
-    int32 excCursor
-    int32 excRecycleCursor
-    PowerExchangerComponent excPool[excCursor - 1]
-    int32 excRecycle[excRecycleCursor]
-    int32 networkCapacity
-    int32 netCursor
-    int32 netRecycleCursor
-    [netCursor] {
-        int32 powerNetworkIncludedFlag
-        PowerNetwork netPool (powerNetworkIncludedFlag == 1)
-    }
-    int32 netRecycle[netRecycleCursor]
-}
-"""
-
-
 class PowerNetworkSwitch(Model):
     powerNetworkIncludedFlag = Int32Field()
     netPool = ConditionalField(lambda: ModelField(PowerNetwork),

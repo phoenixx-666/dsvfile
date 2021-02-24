@@ -3,38 +3,6 @@ from ...Func import ge
 from . import Model, Int32Field
 
 
-"""
-PowerExchangerComponent
-{
-    int32 version = 1
-    int32 id
-    int32 entityId
-    int32 networkId
-    int16 emptyCount
-    int16 fullCount
-    float targetState
-    float state
-    int64 energyPerTick
-    int64 curPoolEnergy
-    int64 poolMaxEnergy
-    int32 emptyId
-    int32 fullId
-    int32 belt0 (version >= 1)
-    int32 belt1 (version >= 1)
-    int32 belt2 (version >= 1)
-    int32 belt3 (version >= 1)
-    uint8_bool isOutput0 (version >= 1)
-    uint8_bool isOutput1 (version >= 1)
-    uint8_bool isOutput2 (version >= 1)
-    uint8_bool isOutput3 (version >= 1)
-    int32 outputSlot (version >= 1)
-    int32 inputSlot (version >= 1)
-    int32 outputRectify (version >= 1)
-    int32 inputRectify (version >= 1)
-}
-"""
-
-
 class PowerExchangerComponent(Model):
     version = Int32Field()
     id = Int32Field()

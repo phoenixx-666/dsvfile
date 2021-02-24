@@ -2,34 +2,6 @@ from ...Fields import FloatField, BoolField
 from . import Model, Int32Field
 
 
-"""
-SiloComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 planetId
-    int32 pcId
-    int32 direction
-    int32 time
-    uint8_bool fired
-    int32 chargeSpend
-    int32 coldSpend
-    int32 bulletId
-    int32 bulletCount
-    int32 autoIndex
-    uint8_bool hasNode
-    float localPos_x
-    float localPos_y
-    float localPos_z
-    float localRot_x
-    float localRot_y
-    float localRot_z
-    float localRot_w
-}
-"""
-
-
 class SiloComponent(Model):
     version = Int32Field()
     id = Int32Field()

@@ -1,20 +1,6 @@
 from . import Model, Int32Field
 
 
-"""
-RemoteLogisticOrder 
-{
-    int32 version = 0
-    int32 otherStationGId
-    int32 thisIndex
-    int32 otherIndex
-    int32 itemId
-    int32 thisOrdered
-    int32 otherOrdered
-}
-"""
-
-
 class RemoteLogisticOrder(Model):
     version = Int32Field()
     otherStationGId = Int32Field()

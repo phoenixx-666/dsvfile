@@ -1,47 +1,6 @@
 from ...Fields import FloatField, DoubleField
 from . import Model, Int32Field
 
-"""
-ShipData 
-{
-    int32 version = 0
-    int32 stage
-    int32 planetA
-    int32 planetB
-    double uPos_x
-    double uPos_y
-    double uPos_z
-    float uVel_x
-    float uVel_y
-    float uVel_z
-    float uSpeed
-    float warpState
-    float uRot_x
-    float uRot_y
-    float uRot_z
-    float uRot_w
-    float uAngularVel_x
-    float uAngularVel_y
-    float uAngularVel_z
-    float uAngularSpeed
-    double pPosTemp_x
-    double pPosTemp_y
-    double pPosTemp_z
-    float pRotTemp_x
-    float pRotTemp_y
-    float pRotTemp_z
-    float pRotTemp_w
-    int32 otherGId
-    int32 direction
-    float t
-    int32 itemId
-    int32 itemCount
-    int32 gene
-    int32 shipIndex
-    int32 warperCnt
-}
-"""
-
 
 class ShipData(Model):
     version = Int32Field()

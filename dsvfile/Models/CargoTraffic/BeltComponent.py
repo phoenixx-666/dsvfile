@@ -1,25 +1,6 @@
 from . import Model, Int32Field
 
 
-"""
-BeltComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 speed
-    int32 segPathId
-    int32 segIndex
-    int32 segPivotOffset
-    int32 segLength
-    int32 outputId
-    int32 backInputId
-    int32 leftInputId
-    int32 rightInputId
-}
-"""
-
-
 class BeltComponent(Model):
     version = Int32Field()
     id = Int32Field()

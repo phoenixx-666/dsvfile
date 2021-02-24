@@ -6,32 +6,6 @@ from .SplitterComponent import SplitterComponent
 from .CargoPath import CargoPath
 
 
-"""
-CargoTraffic
-{
-    int32 version = 0
-    int32 beltCursor
-    int32 beltCapacity
-    int32 beltRecycleCursor
-    int32 splitterCursor
-    int32 splitterCapacity
-    int32 splitterRecycleCursor
-    int32 pathCursor
-    int32 pathCapacity
-    int32 pathRecycleCursor
-    BeltComponent beltPool[beltCursor - 1]
-    int32 beltRecycle[beltRecycleCursor]
-    SplitterComponent splitterPool[splitterCursor - 1]
-    int32 splitterRecycle[splitterRecycleCursor]
-    [pathCursor - 1] {
-        int32 cargoPathIndex
-        CargoPath pathPool (cargoPathIndex != 0)
-    }
-    int32 pathRecycle[pathRecycleCursor]
-}
-"""
-
-
 class CargoPathSwitch(Model):
     cargoPathIndex = Int32Field()
     pathPool = ConditionalField(lambda: ModelField(CargoPath), arg_fields='cargoPathIndex', condition_func=ne(0))

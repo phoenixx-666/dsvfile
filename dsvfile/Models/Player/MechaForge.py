@@ -2,38 +2,6 @@ from ...Fields import ArrayField
 from . import Model, Int32Field, ModelField
 
 
-"""
-MechaForge
-{
-    int32 version = 0
-    int32 numTasks
-    ForgeTask tasks[numTasks]
-}
-
-ForgeTask
-{
-    int32 version = 0
-    int32 recipeId
-    int32 count
-    int32 tick
-    int32 tickSpend
-    int32 numItem
-    int32 numProduct
-    [numItem] {
-        int32 itemIds
-        int32 itemCounts
-        int32 served
-    }
-    [numProduct] {
-        int32 productIds
-        int32 productCounts
-        int32 produced
-    }
-    int32 parentTaskIndex
-}
-"""
-
-
 class Item(Model):
     itemIds = Int32Field()
     itemCounts = Int32Field()

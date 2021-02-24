@@ -3,32 +3,6 @@ from ...Fields.Enums import EMonsterState
 from . import Model, Int32Field
 
 
-"""
-MonsterComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    float walkSpeed
-    float point0_x
-    float point0_y
-    float point0_z
-    float point1_x
-    float point1_y
-    float point1_z
-    float point2_x
-    float point2_y
-    float point2_z
-    int32 direction
-    float stopTime
-    float t
-    float stopCurrentTime
-    int32 EMonsterState monsterState (Null, Stopped, Wandering)
-    float stepDistance
-}
-"""
-
-
 class MonsterComponent(Model):
     version = Int32Field()
     id = Int32Field()

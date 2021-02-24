@@ -2,29 +2,6 @@ from ...Fields import FloatField
 from . import Model, Int32Field, ArrayField
 
 
-"""
-PowerNetworkStructures::Node
-{
-    int32 version = 0
-    int32 id
-    float x
-    float y
-    float z
-    float connDistance2
-    float coverRadius2
-    int32 genId
-    int32 accId
-    int32 excId
-    int32 numConnIdsForLoad
-    int32 numLineIdsForLoad
-    int32 numConsumers
-    int32 connIdsForLoad[numConnIdsForLoad]
-    int32 lineIdsForLoad[numLineIdsForLoad]
-    int32 consumers[numConsumers]
-}
-"""
-
-
 class PowerNetworkNode(Model):
     version = Int32Field()
     id = Int32Field()

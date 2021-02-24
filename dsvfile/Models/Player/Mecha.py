@@ -6,47 +6,6 @@ from .MechaLab import MechaLab
 from .MechaDrone import MechaDrone
 
 
-"""
-Mecha
-{
-    int32 version = 0
-    double coreEnergyCap
-    double coreEnergy
-    double corePowerGen
-    double reactorPowerGen
-    double reactorEnergy
-    int32 reactorItemId
-    StorageComponent reactorStorage
-    StorageComponent warpStorage
-    double walkPower
-    double jumpEnergy
-    double thrustPowerPerAcc
-    double warpKeepingPowerPerSpeed
-    double warpStartPowerPerSpeed
-    double miningPower
-    double replicatePower
-    double researchPower
-    double droneEjectEnergy
-    double droneEnergyPerMeter
-    int32 coreLevel
-    int32 thrusterLevel
-    float miningSpeed
-    float replicateSpeed
-    float walkSpeed
-    float jumpSpeed
-    float maxSailSpeed
-    float maxWarpSpeed
-    float buildArea
-    MechaForge
-    MechaLab
-    int32 droneCount
-    float droneSpeed
-    int32 droneMovement
-    MechaDrone[droneCount]
-}
-"""
-
-
 class Mecha(Model):
     version = Int32Field()
     coreEnergyCap = DoubleField()

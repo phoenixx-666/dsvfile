@@ -4,19 +4,6 @@ from .. import Model, Int32Field
 from .MonsterComponent import MonsterComponent
 
 
-"""
-MonsterSystem
-{
-    int32 version = 0
-    int32 monsterCapacity
-    int32 monsterCursor
-    int32 monsterRecycleCursor
-    MonsterComponent monsterPool[monsterCursor - 1]
-    int32 monsterRecycle[monsterRecycleCursor]
-}
-"""
-
-
 class MonsterSystem(Model):
     version = Int32Field()
     monsterCapacity = Int32Field()

@@ -2,24 +2,6 @@ from ...Fields import Int64Field, FloatField
 from . import Model, Int32Field
 
 
-"""
-PowerConsumerComponent
-{
-    int32 version = 0
-    int32 id
-    int32 entityId
-    int32 networkId
-    float plugPos_x
-    float plugPos_y
-    float plugPos_z
-    int64 requiredEnergy
-    int64 servedEnergy
-    int64 workEnergyPerTick
-    int64 idleEnergyPerTick
-}
-"""
-
-
 class PowerConsumerComponent(Model):
     version = Int32Field()
     id = Int32Field()

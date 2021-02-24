@@ -7,44 +7,6 @@ from .DysonRocket import DysonRocket
 from .DysonNodeRData import DysonNodeRData
 
 
-"""
-DysonSphere
-{
-    int32 version = 2
-    (version >= 1) {
-        int32 randSeed
-        DysonSwarm
-        int32 = 1212: File will be rejected if the value is not 1212
-        int32 layerCount
-        int32 numDysonSphereLayer
-        [numDysonSphereLayer - 1] {
-            int32 dysonSphereLayerIndex
-            DysonSphereLayer (dysonSphereLayerIndex != 0)
-        }
-        int32 rocketCapacity
-        int32 rocketCursor
-        int32 rocketRecycleCursor
-        DysonRocket rocketPool[rocketCursor - 1]
-        int32 rocketRecycle[rocketRecycleCursor]
-        int32 autoNodeCount
-        int32 numAutoNodes
-        [numAutoNodes] {
-            int32 autoNodeIncludedFlag
-            int32 layerId (autoNodeIncludedFlag > 0)
-            int32 nodeId (autoNodeIncludedFlag > 0)
-        }
-    }
-    (version >= 2) {
-        int32 nrdCapacity
-        int32 nrdCursor
-        int32 nrdRecycleCursor
-        DysonNodeRData nrdPool[nrdCursor]
-        int32 nrdRecycle[nrdRecycleCursor]
-    }
-}
-"""
-
-
 class DysonSphereLayerSwitch(Model):
     dysonSphereLayerIndex = Int32Field()
     dysonSphereLayer = ConditionalField(lambda: ModelField(DysonSphereLayer),

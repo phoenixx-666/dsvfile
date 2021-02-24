@@ -11,32 +11,6 @@ from .Planets import PlanetFactory
 from .DysonSphere import DysonSphereSwitch
 
 
-"""
-GameData
-{
-    int32 version = 2
-    string gameName
-    GameDesc
-    int64 gameTick
-    GamePrefsData preferences (version >= 1)
-    GameHistoryData
-    uint8_bool hidePlayerModel (version >= 2)
-    uint8_bool disableController (version >= 2)
-    GameStatData statistics
-    int32 planetId
-    Player mainPlayer
-    int32 factoryCount
-    GalacticTransport
-    PlanetFactory[factoryCount]
-    int32 galaxyStarCount: Must equal GameDesc::starCount or the game will crash.
-    [galaxyStarCount] {
-        int32 dysonSphereDataIsAvailableFlag: Must be 0 or 1 or the game will crash.
-        DysonSphere (dysonSphereDataIsAvailableFlag == 1)
-    }
-}
-"""
-
-
 class GameData(Model):
     version = Int32Field()
     gameName = StringField()
