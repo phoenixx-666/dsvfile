@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from struct import unpack, pack
 
 
@@ -21,6 +22,32 @@ class Field(object):
 
     def write(self, value, output_stream, model):
         raise NotImplementedError
+
+
+class FieldMap(Mapping):
+    _dict = {}
+
+    def __init__(self, dict):
+        self._dict = dict
+
+    def __getitem__(self, item):
+        return self._dict.__getitem__(item)
+
+    def __iter__(self):
+        return self._dict.__iter__()
+
+    def __len__(self):
+        return len(self._dict)
+
+    def __getattribute__(self, name):
+        if name != '_dict' and name in self._dict:
+            return self._dict[name]
+        return super().__getattribute__(name)
+
+    def __setattr__(self, name, value):
+        if name != '_dict' and name in self._dict:
+            raise AttributeError("can't set attribute")
+        super().__setattr__(name, value)
 
 
 class FixedHeaderField(Field):
@@ -232,7 +259,7 @@ class ConditionMixin(object):
     def _check_condition(self, model):
         if self.condition_func is None:
             return True
-        args = [model.field_values[field] for field in self.arg_fields]
+        args = [model.__getattribute__(field) for field in self.arg_fields]
         return self.condition_func(*args)
 
 
