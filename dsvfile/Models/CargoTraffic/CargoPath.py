@@ -28,6 +28,6 @@ class CargoPath(Model):
     numInputPaths = Int32Field()
     buffer = ByteStringField(length_field='bufferLength')
     chunks = ArrayField(Int32Field, length_field='chunkCount', length_func=mul(3))
-    points = ArrayField(lambda: ModelField(Point), length_field='bufferLength')
+    points = ArrayField(ModelField(Point), length_field='bufferLength')
     belts = ArrayField(Int32Field, length_field='numBelts')
     inputPaths = ArrayField(Int32Field, length_field='numInputPaths')

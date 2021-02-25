@@ -9,6 +9,5 @@ class MonsterSystem(Model):
     monsterCapacity = Int32Field()
     monsterCursor = Int32Field()
     monsterRecycleCursor = Int32Field()
-    monsterPool = ArrayField(lambda: ModelField(MonsterComponent),
-                             length_field='monsterCursor', length_func=decr())
+    monsterPool = ArrayField(ModelField(MonsterComponent), length_field='monsterCursor', length_func=decr())
     monsterRecycle = ArrayField(Int32Field, length_field='monsterRecycleCursor')

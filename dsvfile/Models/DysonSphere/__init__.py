@@ -9,7 +9,7 @@ from .DysonNodeRData import DysonNodeRData
 
 class DysonSphereLayerSwitch(Model):
     dysonSphereLayerIndex = Int32Field()
-    dysonSphereLayer = ConditionalField(lambda: ModelField(DysonSphereLayer),
+    dysonSphereLayer = ConditionalField(ModelField(DysonSphereLayer),
                                         arg_fields='dysonSphereLayerIndex', condition_func=ne(0))
 
 
@@ -27,25 +27,25 @@ class DysonSphere(Model):
     eq1212 = Int32Field()
     layerCount = Int32Field()
     numDysonSphereLayer = Int32Field()
-    dysonSphereLayers = ArrayField(lambda: ModelField(DysonSphereLayerSwitch),
+    dysonSphereLayers = ArrayField(ModelField(DysonSphereLayerSwitch),
                                    length_field='numDysonSphereLayer', length_func=decr())
     rocketCapacity = Int32Field()
     rocketCursor = Int32Field()
     rocketRecycleCursor = Int32Field()
-    rocketPool = ArrayField(lambda: ModelField(DysonRocket), length_field='rocketCursor', length_func=decr())
+    rocketPool = ArrayField(ModelField(DysonRocket), length_field='rocketCursor', length_func=decr())
     rocketRecycle = ArrayField(Int32Field, length_field='rocketRecycleCursor')
     autoNodeCount = Int32Field()
     numAutoNodes = Int32Field()
-    autoNodes = ArrayField(lambda: ModelField(AutoNode), length_field='numAutoNodes')
+    autoNodes = ArrayField(ModelField(AutoNode), length_field='numAutoNodes')
     versionCheck2 = ConditionalBlockStart(arg_fields='version', condition_func=ge(2))
     nrdCapacity = Int32Field()
     nrdCursor = Int32Field()
     nrdRecycleCursor = Int32Field()
-    nrdPool = ArrayField(lambda: ModelField(DysonNodeRData), length_field='nrdCursor', length_func=decr())
+    nrdPool = ArrayField(ModelField(DysonNodeRData), length_field='nrdCursor', length_func=decr())
     nrdRecycle = ArrayField(Int32Field, length_field='nrdRecycleCursor')
 
 
 class DysonSphereSwitch(Model):
     dysonSphereDataIsAvailableFlag = Int32Field()
-    dysonSphere = ConditionalField(lambda: ModelField(DysonSphere),
+    dysonSphere = ConditionalField(ModelField(DysonSphere),
                                    arg_fields='dysonSphereDataIsAvailableFlag', condition_func=eq(1))

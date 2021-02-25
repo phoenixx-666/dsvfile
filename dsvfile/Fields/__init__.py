@@ -16,7 +16,7 @@ class Field(object):
     __field_counter = 0
     type_name = NotImplemented
     hidden = False
-    store_value = True
+    store_value = write_value = True
     always_read = False
 
     def __init__(self):
@@ -182,18 +182,20 @@ class ByteStringField(Field):
         self.format = format
         if isinstance(length_field, str):
             self.length_field = length_field
-        else:
+        elif isinstance(length_field, type):
             self.length_field = length_field()
+        else:
+            self.length_field = length_field
         self.length_func = length_func
         super().__init__()
 
     def read(self, input_stream, model):
         if isinstance(self.length_field, str):
             length = model.__getattribute__(self.length_field)
+            if self.length_func is not None:
+                length = self.length_func(length)
         else:
             length = self.length_field.read(input_stream, model)
-        if self.length_func is not None:
-            length = self.length_func(length)
         return input_stream.read(length)
 
     def write(self, value, output_stream, model):
@@ -212,22 +214,25 @@ class ByteStringField(Field):
 class ArrayField(Field):
     type_name = 'array'
 
-    def __init__(self, item_field, length_field=Int32Field, length_func=None):
-        self.item_field = item_field()
+    def __init__(self, item_field, length_field=Int32Field, length_func=None, index_enum=None):
+        self.item_field = item_field() if isinstance(item_field, type) else item_field
         if isinstance(length_field, str):
             self.length_field = length_field
-        else:
+        elif isinstance(length_field, type):
             self.length_field = length_field()
+        else:
+            self.length_field = length_field
         self.length_func = length_func
+        self.index_enum = index_enum() if isinstance(index_enum, type) else index_enum
         super().__init__()
 
     def read(self, input_stream, model):
         if isinstance(self.length_field, str):
             length = model.__getattribute__(self.length_field)
+            if self.length_func is not None:
+                length = self.length_func(length)
         else:
             length = self.length_field.read(input_stream, model)
-        if self.length_func is not None:
-            length = self.length_func(length)
         return [self.item_field.read(input_stream, model) for i in range(length)]
 
     def write(self, value, output_stream, model):
@@ -271,7 +276,7 @@ class ConditionMixin(object):
 
 class ConditionalField(Field, ConditionMixin):
     def __init__(self, field, arg_fields=[], condition_func=None):
-        self.field = field()
+        self.field = field() if isinstance(field, type) else field
         self.arg_fields = arg_fields if isinstance(arg_fields, (list, tuple)) else [arg_fields]
         self.condition_func = condition_func
         super().__init__()
@@ -288,7 +293,7 @@ class ConditionalField(Field, ConditionMixin):
 
 class ConditionalBlockStart(Field, ConditionMixin):
     hidden = True
-    store_value = False
+    store_value = write_value = False
     always_read = True
 
     def __init__(self, arg_fields=[], condition_func=None):
@@ -305,7 +310,7 @@ class ConditionalBlockStart(Field, ConditionMixin):
 
 class ConditionalBlockEnd(Field):
     hidden = True
-    store_value = False
+    store_value = write_value = False
     always_read = True
 
     def read(self, input_stream, model):

@@ -13,11 +13,11 @@ class GamePrefsData(Model):
     cameraURot_z = FloatField()
     cameraURot_w = FloatField()
     reformCursorSize = ConditionalField(Int32Field, arg_fields='version', condition_func=ge(1))
-    replicatorMultipliers = ConditionalField(lambda: ArrayField(lambda: ModelField(Int32KVP)),
+    replicatorMultipliers = ConditionalField(ArrayField(ModelField(Int32KVP)),
                                              arg_fields='version', condition_func=ge(1))
     detailPower = BoolField()
     detailVein = BoolField()
     detailSpaceGuide = BoolField()
     detailSign = BoolField()
     detailIcon = BoolField()
-    tutorialShowing = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(2))
+    tutorialShowing = ConditionalField(ArrayField(Int32Field), arg_fields='version', condition_func=ge(2))

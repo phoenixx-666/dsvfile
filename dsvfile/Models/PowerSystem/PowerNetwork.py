@@ -10,7 +10,7 @@ class PowerNetwork(Model):
     numGenerators = Int32Field()
     numAccumulators = Int32Field()
     numExchangers = Int32Field()
-    nodes = ArrayField(lambda: ModelField(PowerNetworkNode), length_field='numNodes')
+    nodes = ArrayField(ModelField(PowerNetworkNode), length_field='numNodes')
     consumers = ArrayField(Int32Field, length_field='numConsumers')
     generators = ArrayField(Int32Field, length_field='numGenerators')
     accumulators = ArrayField(Int32Field, length_field='numAccumulators')

@@ -15,4 +15,4 @@ class VeinGroup(Model):
 class PlanetData(Model):
     modData = ByteStringField()
     veinAmounts = ArrayField(Int64Field)
-    veinGroups = ArrayField(lambda: ModelField(VeinGroup))
+    veinGroups = ArrayField(ModelField(VeinGroup))

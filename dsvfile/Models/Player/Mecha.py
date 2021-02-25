@@ -41,4 +41,4 @@ class Mecha(Model):
     droneCount = Int32Field()
     droneSpeed = FloatField()
     droneMovement = Int32Field()
-    mechaDrones = ArrayField(lambda: ModelField(MechaDrone), length_field='droneCount')
+    mechaDrones = ArrayField(ModelField(MechaDrone), length_field='droneCount')

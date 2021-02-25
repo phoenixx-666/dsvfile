@@ -10,4 +10,4 @@ class GameDesc(Model):
     starCount = Int32Field()
     playerProto = Int32Field()
     resourceMultiplier = ConditionalField(FloatField, arg_fields='version', condition_func=ge(2))
-    themeIds = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(1))
+    themeIds = ConditionalField(ArrayField(Int32Field), arg_fields='version', condition_func=ge(1))

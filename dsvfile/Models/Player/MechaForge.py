@@ -23,11 +23,11 @@ class ForgeTask(Model):
     tickSpend = Int32Field()
     numItem = Int32Field()
     numProduct = Int32Field()
-    items = ArrayField(lambda: ModelField(Item), length_field='numItem')
-    products = ArrayField(lambda: ModelField(Item), length_field='numProduct')
+    items = ArrayField(ModelField(Item), length_field='numItem')
+    products = ArrayField(ModelField(Item), length_field='numProduct')
     parentTaskIndex = Int32Field()
 
 
 class MechaForge(Model):
     version = Int32Field()
-    tasks = ArrayField(lambda: ModelField(ForgeTask))
+    tasks = ArrayField(ModelField(ForgeTask))

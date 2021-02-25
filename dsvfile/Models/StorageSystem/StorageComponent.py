@@ -24,4 +24,4 @@ class StorageComponent(Model):
     storageType = EStorageType()
     gridSize = Int32Field()
     bans = ConditionalField(Int32Field, arg_fields='version', condition_func=ge(1))
-    grids = ArrayField(lambda: ModelField(Grid), length_field='gridSize')
+    grids = ArrayField(ModelField(Grid), length_field='gridSize')

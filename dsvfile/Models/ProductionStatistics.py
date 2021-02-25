@@ -5,6 +5,6 @@ from .FactoryProductionStat import FactoryProductionStat
 
 class ProductionStatistics(Model):
     version = Int32Field()
-    factoryStatPool = ArrayField(lambda: ModelField(FactoryProductionStat))
+    factoryStatPool = ArrayField(ModelField(FactoryProductionStat))
     firstCreateIds = ArrayField(Int32Field)
     favoriteIds = ArrayField(Int32Field)

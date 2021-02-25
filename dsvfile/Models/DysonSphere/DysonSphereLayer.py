@@ -8,17 +8,17 @@ from .DysonShell import DysonShell
 
 class DysonNodeSwitch(Model):
     dysonNodeIndex = Int32Field()
-    dysonNode = ConditionalField(lambda: ModelField(DysonNode), arg_fields='dysonNodeIndex', condition_func=ne(0))
+    dysonNode = ConditionalField(ModelField(DysonNode), arg_fields='dysonNodeIndex', condition_func=ne(0))
 
 
 class DysonFrameSwitch(Model):
     dysonFrameIndex = Int32Field()
-    dysonFrame = ConditionalField(lambda: ModelField(DysonFrame), arg_fields='dysonFrameIndex', condition_func=ne(0))
+    dysonFrame = ConditionalField(ModelField(DysonFrame), arg_fields='dysonFrameIndex', condition_func=ne(0))
 
 
 class DysonShellSwitch(Model):
     dysonShellIndex = Int32Field()
-    dysonShell = ConditionalField(lambda: ModelField(DysonShell), arg_fields='dysonShellIndex', condition_func=ne(0))
+    dysonShell = ConditionalField(ModelField(DysonShell), arg_fields='dysonShellIndex', condition_func=ne(0))
 
 
 class DysonSphereLayer(Model):
@@ -43,15 +43,15 @@ class DysonSphereLayer(Model):
     nodeCapacity = Int32Field()
     nodeCursor = Int32Field()
     nodeRecycleCursor = Int32Field()
-    nodes = ArrayField(lambda: ModelField(DysonNodeSwitch), length_field='nodeCursor', length_func=decr())
+    nodes = ArrayField(ModelField(DysonNodeSwitch), length_field='nodeCursor', length_func=decr())
     nodeRecycle = ArrayField(Int32Field, length_field='nodeRecycleCursor')
     frameCapacity = Int32Field()
     frameCursor = Int32Field()
     frameRecycleCursor = Int32Field()
-    frames = ArrayField(lambda: ModelField(DysonFrameSwitch), length_field='frameCursor', length_func=decr())
+    frames = ArrayField(ModelField(DysonFrameSwitch), length_field='frameCursor', length_func=decr())
     frameRecycle = ArrayField(Int32Field, length_field='frameRecycleCursor')
     shellCapacity = Int32Field()
     shellCursor = Int32Field()
     shellRecycleCursor = Int32Field()
-    shells = ArrayField(lambda: ModelField(DysonShellSwitch), length_field='shellCursor', length_func=decr())
+    shells = ArrayField(ModelField(DysonShellSwitch), length_field='shellCursor', length_func=decr())
     shellRecycle = ArrayField(Int32Field, length_field='shellRecycleCursor')

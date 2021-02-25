@@ -37,7 +37,7 @@ class Model(object):
                 write_field = field.read(None, self)
             elif isinstance(field, ConditionalBlockEnd):
                 write_field = True
-            elif field.store_value and not field.hidden:
+            elif field.write_value:
                 field.write(self._field_values[fname], output_stream, self)
 
     def __getattribute__(self, name):

@@ -23,8 +23,7 @@ class FactoryProductionStat(Model):
     version = Int32Field()
     productCapacity = Int32Field()
     productCursor = Int32Field()
-    productStat = ArrayField(lambda: ModelField(ProductStat),
-                             length_field='productCursor', length_func=decr())
-    powerStat = ArrayField(lambda: ModelField(PowerStat))
+    productStat = ArrayField(ModelField(ProductStat), length_field='productCursor', length_func=decr())
+    powerStat = ArrayField(ModelField(PowerStat))
     productIndices = ArrayField(Int32Field)
     energyConsumption = ConditionalField(Int64Field, arg_fields='version', condition_func=ge(1))

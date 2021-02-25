@@ -5,4 +5,4 @@ from .. import Int32KVP
 
 class MechaLab(Model):
     version = Int32Field()
-    itemPoints = ArrayField(lambda: ModelField(Int32KVP))
+    itemPoints = ArrayField(ModelField(Int32KVP))

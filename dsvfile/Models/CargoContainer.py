@@ -20,5 +20,5 @@ class CargoContainer(Model):
     cursor = Int32Field()
     recycleBegin = Int32Field()
     recycleEnd = Int32Field()
-    cargoPool = ArrayField(lambda: ModelField(Cargo), length_field='cursor')
+    cargoPool = ArrayField(ModelField(Cargo), length_field='cursor')
     recycleIds = ArrayField(Int32Field, length_field='poolCapacity')

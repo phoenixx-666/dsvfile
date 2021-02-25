@@ -11,7 +11,7 @@ from .PowerNetwork import PowerNetwork
 
 class PowerNetworkSwitch(Model):
     powerNetworkIncludedFlag = Int32Field()
-    netPool = ConditionalField(lambda: ModelField(PowerNetwork),
+    netPool = ConditionalField(ModelField(PowerNetwork),
                                arg_fields='powerNetworkIncludedFlag', condition_func=eq(1))
 
 
@@ -20,32 +20,32 @@ class PowerSystem(Model):
     generatorCapacity = Int32Field()
     genCursor = Int32Field()
     genRecycleCursor = Int32Field()
-    genPool = ArrayField(lambda: ModelField(PowerGeneratorComponent), length_field='genCursor', length_func=decr())
+    genPool = ArrayField(ModelField(PowerGeneratorComponent), length_field='genCursor', length_func=decr())
     genRecycle = ArrayField(Int32Field, length_field='genRecycleCursor')
     nodeCapacity = Int32Field()
     nodeCursor = Int32Field()
     nodeRecycleCursor = Int32Field()
-    nodePool = ArrayField(lambda: ModelField(PowerNodeComponent), length_field='nodeCursor', length_func=decr())
+    nodePool = ArrayField(ModelField(PowerNodeComponent), length_field='nodeCursor', length_func=decr())
     nodeRecycle = ArrayField(Int32Field, length_field='nodeRecycleCursor')
     consumerCapacity = Int32Field()
     consumerCursor = Int32Field()
     consumerRecycleCursor = Int32Field()
-    consumerPool = ArrayField(lambda: ModelField(PowerConsumerComponent),
+    consumerPool = ArrayField(ModelField(PowerConsumerComponent),
                               length_field='consumerCursor', length_func=decr())
     consumerRecycle = ArrayField(Int32Field, length_field='consumerRecycleCursor')
     accumulatorCapacity = Int32Field()
     accCursor = Int32Field()
     accRecycleCursor = Int32Field()
-    accPool = ArrayField(lambda: ModelField(PowerAccumulatorComponent),
+    accPool = ArrayField(ModelField(PowerAccumulatorComponent),
                          length_field='accCursor', length_func=decr())
     accRecycle = ArrayField(Int32Field, length_field='accRecycleCursor')
     exchangerCapacity = Int32Field()
     excCursor = Int32Field()
     excRecycleCursor = Int32Field()
-    excPool = ArrayField(lambda: ModelField(PowerExchangerComponent), length_field='excCursor', length_func=decr())
+    excPool = ArrayField(ModelField(PowerExchangerComponent), length_field='excCursor', length_func=decr())
     excRecycle = ArrayField(Int32Field, length_field='excRecycleCursor')
     networkCapacity = Int32Field()
     netCursor = Int32Field()
     netRecycleCursor = Int32Field()
-    netPool = ArrayField(lambda: ModelField(PowerNetworkSwitch), length_field='netCursor')
+    netPool = ArrayField(ModelField(PowerNetworkSwitch), length_field='netCursor')
     netRecycle = ArrayField(Int32Field, length_field='netRecycleCursor')
