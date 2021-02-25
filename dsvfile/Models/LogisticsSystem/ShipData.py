@@ -1,4 +1,5 @@
 from ...Fields import FloatField, DoubleField
+from ...Fields.Enums import EItem
 from . import Model, Int32Field
 
 
@@ -33,7 +34,7 @@ class ShipData(Model):
     otherGId = Int32Field()
     direction = Int32Field()
     t = FloatField()
-    itemId = Int32Field()
+    itemId = EItem()
     itemCount = Int32Field()
     gene = Int32Field()
     shipIndex = Int32Field()

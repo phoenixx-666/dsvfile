@@ -1,12 +1,16 @@
 from ..Fields import Field, FieldMap, Int32Field, ConditionalBlockStart, ConditionalBlockEnd
 
 
+__all__ = ['Model', 'Int32KVP']
+
+
 class Model(object):
     _field_values = {}
 
     def __init__(self):
         fields = {fname: field for fname, field in self.__class__.__dict__.items() if isinstance(field, Field)}
-        ordered_fields = sorted(((fname, field) for fname, field in fields.items()), key=lambda c: c[1].order)
+        ordered_fields = sorted(((fname, field) for fname, field in fields.items()),
+                                key=lambda c: c[1].initialization_order)
         self._ordered_fields = ordered_fields
         self._fields = FieldMap(fields)
         self._open_fields = tuple(fname for fname, field in ordered_fields if not field.hidden)

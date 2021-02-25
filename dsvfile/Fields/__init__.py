@@ -2,20 +2,26 @@ from collections.abc import Mapping
 from struct import unpack, pack
 
 
+__all__ = ['IncorrectHeaderException', 'Field', 'FieldMap', 'FixedHeaderField', 'UInt8Field', 'Int16Field',
+           'Int32Field', 'Int64Field', 'UInt32Field', 'UInt64Field', 'FloatField', 'DoubleField', 'EnumField',
+           'BoolField', 'StringField', 'ByteStringField', 'ArrayField', 'ModelField', 'ConditionalField',
+           'ConditionalBlockStart', 'ConditionalBlockEnd']
+
+
 class IncorrectHeaderException(IOError):
     pass
 
 
 class Field(object):
-    field_counter = 0
+    __field_counter = 0
     type_name = NotImplemented
     hidden = False
     store_value = True
     always_read = False
 
     def __init__(self):
-        self.order = Field.field_counter
-        Field.field_counter += 1
+        self.initialization_order = Field.__field_counter
+        Field.__field_counter += 1
 
     def read(self, input_stream, model):
         raise NotImplementedError

@@ -1,4 +1,5 @@
 from ...Fields import FloatField
+from ...Fields.Enums import EItem
 from . import Model, Int32Field
 
 
@@ -14,6 +15,6 @@ class DroneData(Model):
     direction = FloatField()
     maxt = FloatField()
     t = FloatField()
-    itemId = Int32Field()
+    itemId = EItem()
     itemCount = Int32Field()
     gene = Int32Field()

@@ -1,5 +1,5 @@
 from ...Fields import FloatField, DoubleField, BoolField, ModelField
-from ...Fields.Enums import EMovementState
+from ...Fields.Enums import EItem, EMovementState
 from .. import Model, Int32Field
 from .Mecha import Mecha
 from ..StorageSystem.StorageComponent import StorageComponent
@@ -25,7 +25,7 @@ class Player(Model):
     uVelocity_x = DoubleField()
     uVelocity_y = DoubleField()
     uVelocity_z = DoubleField()
-    inhandItemId = Int32Field()
+    inhandItemId = EItem()
     inhandItemCount = Int32Field()
     mecha = ModelField(Mecha)
     package = ModelField(StorageComponent)

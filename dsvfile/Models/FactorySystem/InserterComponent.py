@@ -1,5 +1,5 @@
 from ...Fields import Int16Field, FloatField, BoolField
-from ...Fields.Enums import EInserterStage
+from ...Fields.Enums import EInserterStage, EItem
 from . import Model, Int32Field
 
 
@@ -20,7 +20,7 @@ class InserterComponent(Model):
     pickOffset = Int16Field()
     insertOffset = Int16Field()
     filter = Int32Field()
-    itemId = Int32Field()
+    itemId = EItem()
     stackCount = Int32Field()
     stackSize = Int32Field()
     pos2_x = FloatField()

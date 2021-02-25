@@ -1,4 +1,5 @@
 from ..Fields import Int64Field, ModelField, ArrayField, ConditionalField
+from ..Fields.Enums import EItem
 from ..Func import decr, ge
 from . import Model, Int32Field
 
@@ -8,7 +9,7 @@ class ProductStat(Model):
     count = ArrayField(Int32Field)
     cursor = ArrayField(Int32Field)
     total = ArrayField(Int32Field)
-    itemId = Int32Field()
+    itemId = EItem()
 
 
 class PowerStat(Model):

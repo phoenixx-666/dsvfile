@@ -1,4 +1,5 @@
 from ...Fields import ArrayField
+from ...Fields.Enums import EItem
 from . import Model, Int32Field, FloatField, DoubleField, ModelField
 from ..StorageSystem.StorageComponent import StorageComponent
 from .MechaForge import MechaForge
@@ -13,7 +14,7 @@ class Mecha(Model):
     corePowerGen = DoubleField()
     reactorPowerGen = DoubleField()
     reactorEnergy = DoubleField()
-    reactorItemId = Int32Field()
+    reactorItemId = EItem()
     reactorStorage = ModelField(StorageComponent)
     warpStorage = ModelField(StorageComponent)
     walkPower = DoubleField()

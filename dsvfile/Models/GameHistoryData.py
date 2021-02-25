@@ -1,4 +1,5 @@
 from ..Fields import Int64Field, FloatField, BoolField, ModelField, ArrayField, ConditionalField
+from ..Fields.Enums import ERecipe
 from ..Func import ge
 from . import Model, Int32Field
 
@@ -14,7 +15,7 @@ class TechState(Model):
 
 class GameHistoryData(Model):
     version = Int32Field()
-    recipeUnlocked = ArrayField(Int32Field)
+    recipeUnlocked = ArrayField(ERecipe)
     tutorialUnlocked = ConditionalField(lambda: ArrayField(Int32Field), arg_fields='version', condition_func=ge(2))
     featureKeys = ArrayField(Int32Field)
     techStates = ArrayField(lambda: ModelField(TechState))

@@ -1,4 +1,5 @@
 from ...Fields import UInt8Field, Int16Field
+from ...Fields.Enums import ERecipe
 from . import Model, Int32Field, FloatField, ArrayField
 
 
@@ -24,6 +25,6 @@ class PrebuildData(Model):
     upEntity = Int32Field()
     pickOffset = Int16Field()
     insertOffset = Int16Field()
-    recipeId = Int32Field()
+    recipeId = ERecipe()
     filterId = Int32Field()
     refArr = ArrayField(Int32Field)

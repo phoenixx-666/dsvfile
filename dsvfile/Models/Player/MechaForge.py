@@ -1,9 +1,10 @@
 from ...Fields import ArrayField
+from ...Fields.Enums import EItem, ERecipe
 from . import Model, Int32Field, ModelField
 
 
 class Item(Model):
-    itemIds = Int32Field()
+    itemIds = EItem()
     itemCounts = Int32Field()
     served = Int32Field()
 
@@ -16,7 +17,7 @@ class Product(Model):
 
 class ForgeTask(Model):
     version = Int32Field()
-    recipeId = Int32Field()
+    recipeId = ERecipe()
     count = Int32Field()
     tick = Int32Field()
     tickSpend = Int32Field()

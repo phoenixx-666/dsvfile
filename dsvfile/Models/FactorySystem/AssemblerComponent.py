@@ -1,5 +1,5 @@
 from ...Fields import BoolField, ConditionalBlockStart
-from ...Fields.Enums import ERecipeType
+from ...Fields.Enums import ERecipe, ERecipeType
 from ...Func import g
 from . import Model, Int32Field, ArrayField
 
@@ -13,7 +13,7 @@ class AssemblerComponent(Model):
     outputing = BoolField()
     speed = Int32Field()
     time = Int32Field()
-    recipeId = Int32Field()
+    recipeId = ERecipe()
     recipeIdChecker = ConditionalBlockStart(arg_fields='recipeId', condition_func=g(0))
     recipeType = ERecipeType()
     timeSpend = Int32Field()

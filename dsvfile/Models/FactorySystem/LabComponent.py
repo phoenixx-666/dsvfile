@@ -1,4 +1,5 @@
 from ...Fields import BoolField, ConditionalBlockStart
+from ...Fields.Enums import ERecipe
 from ...Func import ne
 from . import Model, Int32Field, ArrayField
 
@@ -17,7 +18,7 @@ class LabComponent(Model):
     time = Int32Field()
     hashBytes = Int32Field()
     researchMode = BoolField()
-    recipeId = Int32Field()
+    recipeId = ERecipe()
     techId = Int32Field()
     researchRecipeCheck = ConditionalBlockStart(
         arg_fields=['researchMode', 'recipeId'], condition_func=checker_func)

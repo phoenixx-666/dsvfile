@@ -1,9 +1,10 @@
 from ..Fields import FloatField, ModelField, ArrayField
+from ..Fields.Enums import EItem
 from . import Model, Int32Field
 
 
 class Cargo(Model):
-    item = Int32Field()
+    item = EItem()
     position_x = FloatField()
     position_y = FloatField()
     position_z = FloatField()

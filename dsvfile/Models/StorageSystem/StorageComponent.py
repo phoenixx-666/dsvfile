@@ -1,11 +1,11 @@
 from ...Fields import ConditionalBlockStart, ConditionalBlockEnd
-from ...Fields.Enums import EStorageType
+from ...Fields.Enums import EItem, EStorageType
 from ...Func import ge
 from . import Model, Int32Field, ModelField, ArrayField, ConditionalField
 
 
 class Grid(Model):
-    itemId = Int32Field()
+    itemId = EItem()
     filter = Int32Field()
     count = Int32Field()
     stackSize = Int32Field()
